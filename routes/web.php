@@ -22,3 +22,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 /* Route::get('/', function () {
     return view('welcome');
 }); */
+
+
+/* Route::get('test_helper', function(){
+    return get_languages();
+});
+ */

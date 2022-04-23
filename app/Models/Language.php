@@ -34,6 +34,7 @@ class Language extends Model
 
     // *******************  Scope ******************* //
 
+    // Get Active Languages
     public function scopeActive($query){
         return $query -> where('active',1);
     }

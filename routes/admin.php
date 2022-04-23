@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginAdminController;
+use App\Http\Controllers\Admin\MainCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,25 @@ Route::group(['namespace'=>'Admin', 'middleware' => 'auth:admin'], function() {
     });
 
     // ***************** End Languages Routes ****************** //
+
+    // ***************** Begin Main Categories Routes ****************** //
+
+    Route::group(['prefix'=>'main_categories'], function(){
+
+        Route::get('/', [MainCategoriesController::class, 'index'])->name('admin.mainCategories');
+
+        Route::get('create', [MainCategoriesController::class, 'create'])->name('admin.mainCategories.create');
+
+        Route::post('store', [MainCategoriesController::class, 'store'])->name('admin.mainCategories.store');
+
+        Route::get('edit/{id}', [MainCategoriesController::class, 'edit'])->name('admin.mainCategories.edit');
+
+        Route::post('update/{id}', [MainCategoriesController::class, 'update'])->name('admin.mainCategories.update');
+
+        Route::get('delete/{id}', [MainCategoriesController::class, 'destroy'])->name('admin.mainCategories.delete');
+    });
+
+    // ***************** End Main Categories Routes ****************** //
 
 });
 
