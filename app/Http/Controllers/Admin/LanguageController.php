@@ -21,6 +21,8 @@ class LanguageController extends Controller
         return view('admin.languages.language', compact('languages'));
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,6 +32,8 @@ class LanguageController extends Controller
     {
         return view('admin.languages.createLanguage');
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Store a newly created resource in storage.
@@ -57,6 +61,8 @@ class LanguageController extends Controller
 
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Display the specified resource.
      *
@@ -68,6 +74,8 @@ class LanguageController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -76,8 +84,17 @@ class LanguageController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Use Scope In Language Model
+        $language = Language::select()->find($id);
+
+        if (!$language) {
+            return redirect()->route('admin.languages')->with(['error' => 'هذه اللغة غير موجوده']);
+        }
+
+        return view('admin.languages.editLanguage', compact('language'));
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Update the specified resource in storage.
@@ -86,10 +103,35 @@ class LanguageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LanguageRequest $request, $id)
     {
-        //
+        try {
+
+            $language = Language::find($id);
+
+            if (!$language) {
+                return redirect()->route('admin.languages.edit', $id)->with(['error' => 'هذه اللغة غير موجوده']);
+            }
+
+            // Update Database
+
+            if (!$request->has('active'))
+                $request->request->add(['active' => 0]);
+
+            $language->update($request->except('_token'));
+
+            return redirect()->route('admin.languages')->with(['success' => 'تم تحديث اللغة بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return redirect()->route('admin.languages')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+
+        }
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Remove the specified resource from storage.
@@ -99,6 +141,26 @@ class LanguageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $language = Language::find($id);
+
+            if (!$language) {
+
+                return redirect()->route('admin.languages', $id)->with(['error' => 'هذه اللغة غير موجوده']);
+
+            }
+
+            $language->delete();
+
+            return redirect()->route('admin.languages')->with(['success' => 'تم حذف اللغة بنجاح']);
+
+        }
+        catch (\Exception $ex) {
+
+            return redirect()->route('admin.languages')->with(['error' => 'هناك خطا ما يرجي المحاوله فيما بعد']);
+
+        }
     }
+    
 }
