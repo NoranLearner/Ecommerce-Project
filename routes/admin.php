@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginAdminController;
 
@@ -17,19 +19,36 @@ use App\Http\Controllers\Admin\LoginAdminController;
 |
 */
 
+define('PAGINATION_COUNT',10);
+
+// =================================================================================== //
+
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// =================================================================================== //
-
 // Note that the prefix is admin for all routes - In RouteServiceProvider
+
+// =================================================================================== //
 
 Route::group(['namespace'=>'Admin', 'middleware' => 'auth:admin'], function() {
 
     // The first page admin visits if admin authenticated
 
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    // ***************** Begin Languages Routes ****************** //
+
+    Route::group(['prefix'=>'languages'], function(){
+
+        Route::get('/', [LanguageController::class, 'index'])->name('admin.languages');
+
+        Route::get('create', [LanguageController::class, 'create'])->name('admin.languages.create');
+
+        Route::post('store', [LanguageController::class, 'store'])->name('admin.languages.store');
+    });
+
+    // ***************** End Languages Routes ****************** //
 
 });
 
