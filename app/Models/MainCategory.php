@@ -44,6 +44,12 @@ class MainCategory extends Model
         return $query -> select('id', 'translation_lang', 'name', 'slug', 'photo', 'active');
     }
 
+    // For get photo from DB
+    public function getPhotoAttribute($val)
+    {
+        return ($val !== null) ? asset('assets/' . $val) : "";
+    }
+
     public function getActive(){
         return $this->active == 1 ? 'مفعل' : 'غير مفعل';
     }

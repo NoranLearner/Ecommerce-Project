@@ -11,7 +11,24 @@ function getLanguages(){
 }
 
 function getDefaultLang(){
-
+    // config/app.php
     return config::get('app.locale');
 
+}
+
+// config/filesystems.php
+function uploadImage($folder, $image)
+{
+    $image->store('/', $folder);
+    $filename = $image->hashName();
+    $path = 'images/' . $folder . '/' . $filename;
+    return $path;
+}
+
+function uploadVideo($folder, $video)
+{
+    $video->store('/', $folder);
+    $filename = $video->hashName();
+    $path = 'video/' . $folder . '/' . $filename;
+    return $path;
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    اضافة لغة
+    اضافة قسم رئيسي
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> اللغات </h3>
+                    <h3 class="content-header-title"> الاقسام الرئيسية </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
@@ -18,9 +18,9 @@
                                     <a href="{{route('admin.dashboard')}}"> الرئيسية </a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{route('admin.languages')}}"> أللغات </a>
+                                    <a href="{{route('admin.languages')}}"> الاقسام الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة لغة
+                                <li class="breadcrumb-item active">إضافة قسم رئيسي
                                 </li>
                             </ol>
                         </div>
@@ -40,7 +40,7 @@
                             <div class="card">
 
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة لغة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة قسم رئيسي </h4>
                                     <a class="heading-elements-toggle">
                                         <i class="la la-ellipsis-v font-medium-3"></i>
                                     </a>
@@ -60,13 +60,36 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
 
-                                        <form class="form" action="{{route('admin.languages.store')}}" method="POST" enctype="multipart/form-data">
+                                        <form class="form" action="{{route('admin.mainCategories.store')}}" method="POST" enctype="multipart/form-data">
 
                                             @csrf
 
+                                            <!-- ------------------------------------- -->
+
+                                            <div class="form-group">
+                                                <label> صوره القسم </label>
+                                                <label id="projectinput7" class="file center-block">
+                                                    <input type="file" id="file" name="photo">
+                                                    <span class="file-custom"></span>
+                                                </label>
+                                                @error('photo')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+
+                                            <!-- ------------------------------------- -->
+
                                             <div class="form-body">
 
-                                                <h4 class="form-section"> <i class="ft-home"></i> بيانات  اللغة </h4>
+                                                <h4 class="form-section"> <i class="ft-home"></i> بيانات  القسم </h4>
+
+                                                <!-- ------------------------------------- -->
+
+                                                {{-- Helper Method - app/Helpers/General.php--}}
+                                                @if(getLanguages() -> count() > 0)
+
+                                                {{-- This Helper Method has Language Model Fields --}}
+                                                @foreach(getLanguages() as $index => $lang)
 
                                                 <!-- ------------------------------------- -->
 
@@ -74,9 +97,10 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم اللغة </label>
-                                                            <input type="text" value="" id="name" class="form-control" placeholder="ادخل اسم اللغة" name="name">
-                                                            @error('name')
+                                                            {{-- Use Translation file - resources/lang --}}
+                                                            <label for="projectinput1"> اسم القسم - {{__('messages.'.$lang -> abbr)}}</label>
+                                                            <input type="text" value="" id="name" class="form-control" placeholder="" name="category[{{$index}}][name]">
+                                                            @error("category.$index.name")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -84,9 +108,9 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> أختصار اللغة </label>
-                                                            <input type="text" value="" id="name" class="form-control" placeholder="ادخل أختصار اللغة" name="abbr">
-                                                            @error('abbr')
+                                                            <label for="projectinput1"> أختصار اللغة - {{__('messages.'.$lang -> abbr)}}</label>
+                                                            <input type="text" value="" id="abbr" class="form-control" placeholder="" name="category[{{$index}}][abbr]">
+                                                            @error("category.$index.abbr")
                                                             <span class="text-danger">{{$message}} </span>
                                                             @enderror
                                                         </div>
@@ -98,15 +122,11 @@
 
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput2"> الاتجاه </label>
-                                                            <select name="direction" class="select2 form-control">
-                                                                <optgroup label="من فضلك أختر اتجاه اللغة">
-                                                                    <option value="rtl">من اليمين الي اليسار</option>
-                                                                    <option value="ltr">من اليسار الي اليمين</option>
-                                                                </optgroup>
-                                                            </select>
-                                                            @error('direction')
+                                                        <div class="form-group mt-1">
+                                                            <label for="switcheryColor4" class="card-title mr-1"> الحالة - {{__('messages.'.$lang -> abbr)}}</label>
+                                                            {{-- Use Scope In Language Model --}}
+                                                            <input type="checkbox" value="1" name="category[{{$index}}][active]" id="switcheryColor4" class="switchery" data-color="success" checked/>
+                                                            @error("category.$index.active")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -115,18 +135,9 @@
 
                                                 <!-- ------------------------------------- -->
 
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <label for="switcheryColor4" class="card-title mr-1"> الحالة </label>
-                                                            {{-- Use Scope In Language Model --}}
-                                                            <input type="checkbox" value="1" name="active" id="switcheryColor4" class="switchery" data-color="success" checked/>
-                                                            @error('active')
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
+
+                                                @endif
 
                                                 <!-- ------------------------------------- -->
 

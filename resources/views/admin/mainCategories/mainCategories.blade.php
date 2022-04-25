@@ -57,12 +57,13 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
 
-                                        <table class="table display nowrap table-striped table-bordered ">
+                                        <table class="table display nowrap table-striped table-bordered scroll-horizontal">
 
                                             <thead>
                                                 <tr>
-                                                    <th>الاسم</th>
-                                                    <th>اللغة</th>
+                                                    <th>اسم القسم</th>
+                                                    <th>اختصار اللغة</th>
+                                                    <th>الصورة</th>
                                                     <th>الحالة</th>
                                                     <th>الإجراءات</th>
                                                 </tr>
@@ -73,13 +74,18 @@
                                                 @foreach($mainCategories as $mainCategory)
                                                     <tr>
                                                         <td>{{$mainCategory -> name}}</td>
-                                                        <td>{{$mainCategory -> translation_lang}}</td>
+                                                        {{-- <td>{{$mainCategory -> translation_lang}}</td> --}}
+                                                        {{-- OR Use Helper Function --}}
+                                                        <td>{{getDefaultLang()}}</td>
+                                                        <td> <img src="{{$mainCategory -> photo}}" alt="" style="width: 100px; height: 100px;"> </td>
                                                         <!-- In Main Category Model -->
                                                         <td>{{$mainCategory -> getActive()}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group" aria-label="Basic example">
 
                                                                 <a href="{{ route( 'admin.mainCategories.edit', $mainCategory -> id ) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> تعديل </a>
+
+                                                                <a href="{{ route( 'admin.mainCategories.edit', $mainCategory -> id ) }}" class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1"> تفعيل </a>
 
                                                                 <a href="{{ route('admin.mainCategories.delete', $mainCategory -> id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"> حذف </a>
 
