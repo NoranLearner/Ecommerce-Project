@@ -7,11 +7,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 
-class MainCategory extends Model
+class Vendor extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'main_categories';
+    protected $table = 'vendors';
 
     public $timestamps = true;
 
@@ -23,14 +23,24 @@ class MainCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'translation_lang',
-        'translation_of',
         'name',
-        'slug',
-        'photo',
+        'mobile',
+        'email',
+        'address',
+        'logo',
+        'category_id',
         'active',
         'created_at',
         'updated_at'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'category_id',
     ];
 
 // *******************  Scope ******************* //
@@ -41,11 +51,11 @@ class MainCategory extends Model
     }
 
     public function scopeSelection($query){
-        return $query -> select('id', 'translation_lang', 'translation_of', 'name', 'slug', 'photo', 'active');
+        return $query -> select('id','category_id', 'name', 'logo', 'mobile', 'active', 'email', 'address');
     }
 
     // For get photo from DB
-    public function getPhotoAttribute($val)
+    public function getLogoAttribute($val)
     {
         return ($val !== null) ? asset('assets/' . $val) : "";
     }
@@ -56,13 +66,9 @@ class MainCategory extends Model
 
 // *******************  Relationship ******************* //
 
-    public function categories()
+    public function category()
     {
-        return $this->hasMany(self::class, 'translation_of');
-    }
-
-    public function vendors(){
-        return $this -> hasMany('App\Models\Vendor','category_id','id');
+        return $this->belongsTo('App\Models\MainCategory', 'category_id', 'id');
     }
 
 
