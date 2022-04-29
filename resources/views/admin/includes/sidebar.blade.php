@@ -6,6 +6,7 @@
             <li class="nav-item active">
                 <a href="{{ route('admin.dashboard') }}">
                     {{-- Line Awesome Icons --}}
+                    {{-- https://themewagon.github.io/Ready-Bootstrap-Dashboard/icons.html --}}
                     <i class="la la-home"></i>
                     <span class="menu-title" data-i18n="nav.add_on_drag_drop.main">الرئيسية</span>
                 </a>
@@ -37,7 +38,7 @@
                 <a href="">
                     <i class="la la-sitemap"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسية</span>
-                    <span class="badge badge badge-danger badge-pill float-right mr-2">
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
                         {{ App\Models\MainCategory::count() }}
                     </span>
                 </a>
@@ -47,6 +48,26 @@
                     </li>
                     <li>
                         <a class="menu-item" href="{{ route('admin.mainCategories.create') }}" data-i18n="nav.dash.crypto">اضافة قسم جديد</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-institution"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">المتاجر</span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+                        {{ App\Models\MainCategory::count() }}
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active">
+                        <a class="menu-item" href="" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="" data-i18n="nav.dash.crypto">اضافة متجر جديد</a>
                     </li>
                 </ul>
             </li>

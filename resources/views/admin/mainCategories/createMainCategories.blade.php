@@ -95,7 +95,7 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             {{-- Use Translation file - resources/lang --}}
                                                             <label for="projectinput1"> اسم القسم - {{__('messages.'.$lang -> abbr)}}</label>
@@ -106,10 +106,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 hidden">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> أختصار اللغة - {{__('messages.'.$lang -> abbr)}}</label>
-                                                            <input type="text" value="" id="abbr" class="form-control" placeholder="" name="category[{{$index}}][abbr]">
+                                                            <input type="text" value="{{ $lang -> abbr }}" id="abbr" class="form-control" placeholder="" name="category[{{$index}}][abbr]">
                                                             @error("category.$index.abbr")
                                                             <span class="text-danger">{{$message}} </span>
                                                             @enderror

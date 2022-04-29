@@ -80,7 +80,7 @@ class MainCategoriesController extends Controller
         }
 
         // We have two insert in this method
-        
+
         DB::beginTransaction();
 
         // Get Default Category id and Store in DB
@@ -160,7 +160,15 @@ class MainCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        // categories - relationship in model MainCategory
+        // get specific categories and its translations
+
+        $mainCategory = MainCategory::with('categories')->Selection()->find($id);
+
+        if (!$mainCategory)
+        return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+        return view('admin.mainCategories.editMainCategories', compact('mainCategory'));
     }
 
     // ------------------------------------------------------//
@@ -172,9 +180,59 @@ class MainCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MainCategoryRequest $request, $id)
     {
-        //
+        try {
+
+            // Validation
+
+            // Find Main id
+
+            $main_category = MainCategory::find($id);
+
+            if (!$main_category)
+                return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+            // Variable save default category in it
+
+            $category = array_values($request->category) [0];
+
+            // For update active
+
+            if (!$request->has('category.0.active'))
+                $request->request->add(['active' => 0]);
+            else
+                $request->request->add(['active' => 1]);
+
+            // Update Data
+
+            MainCategory::where('id', $id) ->update([
+                'name' => $category['name'],
+                'active' => $request->active,
+            ]);
+
+            // For update photo
+
+            if ($request->has('photo')) {
+
+                // Use Helper Function "uploadImage"
+                $filePath = uploadImage('mainCategories', $request->photo);
+
+                MainCategory::where('id', $id)->update([
+                    'photo' => $filePath,
+                ]);
+            }
+
+
+            return redirect()->route('admin.mainCategories')->with(['success' => 'تم ألتحديث بنجاح']);
+
+        }
+
+        catch(\Exception $ex){
+
+            return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
     }
 
     // ------------------------------------------------------//
