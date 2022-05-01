@@ -125,9 +125,9 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> عنوان المتجر </label>
-                                                            <input type="text" value="" id="address" class="form-control" placeholder="" name="address">
-                                                            @error("address")
+                                                            <label for="projectinput1"> كلمة المرور </label>
+                                                            <input type="password" value="" id="password" class="form-control" placeholder="" name="password">
+                                                            @error("password")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -138,6 +138,16 @@
                                                 <!-- ------------------------------------- -->
 
                                                 <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> عنوان المتجر </label>
+                                                            <input type="text" value="" id="address" class="form-control" placeholder="" name="address">
+                                                            @error("address")
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">

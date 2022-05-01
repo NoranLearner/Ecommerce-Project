@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Vendor;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VendorRequest;
-use PhpParser\Node\Stmt\TryCatch;
+use App\Notifications\VendorCreated;
+use Illuminate\Support\Facades\Notification;
 
 class VendorsController extends Controller
 {
@@ -82,13 +84,16 @@ class VendorsController extends Controller
                 'address' => $request->address,
                 'active' => $request->active,
                 'category_id' => $request->category_id,
-
-                // 'password' => $request->password,
+                // Use Scope in Vendor Model to bcrypt password
+                'password' => $request->password,
                 // 'latitude' => $request->latitude,
                 // 'longitude' => $request->longitude,
             ]);
 
-            // Notification::send($vendor, new VendorCreated($vendor));
+            // For send email to vendor after save it
+            // app/Notifications/VendorCreated.php
+
+            Notification::send($vendor, new VendorCreated($vendor));
 
             // Redirect Message
 

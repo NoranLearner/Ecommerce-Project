@@ -26,6 +26,7 @@ class Vendor extends Model
         'name',
         'mobile',
         'email',
+        'password' ,
         'address',
         'logo',
         'category_id',
@@ -40,7 +41,7 @@ class Vendor extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'category_id',
+        'password' , 'category_id',
     ];
 
 // *******************  Scope ******************* //
@@ -62,6 +63,13 @@ class Vendor extends Model
 
     public function getActive(){
         return $this->active == 1 ? 'مفعل' : 'غير مفعل';
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        if (!empty($password)) {
+            $this->attributes['password'] = bcrypt($password);
+        }
     }
 
 // *******************  Relationship ******************* //

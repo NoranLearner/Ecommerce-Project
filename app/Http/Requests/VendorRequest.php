@@ -27,8 +27,9 @@ class VendorRequest extends FormRequest
             // Logo required in create , Not for update
             'logo' => 'required_without:id|mimes:jpg,jpeg,png',
             'name' => 'required|string|max:150',
-            'mobile' => 'required|max:100',
-            'email' => 'sometimes|nullable|email|max:100',
+            'mobile' => 'required|max:100|unique:vendors,mobile',
+            'email' => 'required|email|max:100|unique:vendors,email',
+            'password'   => 'required_without:id|string|min:6',
             'address' => 'required|string|max:500',
             // category_id must be in main_categories table which is id
             'category_id' => 'required|exists:main_categories,id',
@@ -43,7 +44,10 @@ class VendorRequest extends FormRequest
             'required' => 'هذا الحقل مطلوب',
             'string' => 'هذا الحقل لابد ان يكون احرف و ارقام',
             'max' => 'هذا الحقل طويل',
+            'unique' => 'لقد تم استخدامه سابقا',
             'email.email' => 'صيغة البريد الالكترونى غير صحيحة',
+            'password.required_without' => 'كلمة المرور مطلوبة',
+            'password.min' => 'لابد ان لا يقل عن 6 حروف',
             'category_id.exists' => 'القسم غير موجود',
             // 'in' => 'القيم المدخلة غير صحيحة',
         ];
