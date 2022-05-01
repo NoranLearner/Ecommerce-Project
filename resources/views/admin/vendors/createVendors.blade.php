@@ -115,20 +115,20 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> عنوان المتجر </label>
-                                                            <input type="text" value="" id="pac-input" class="form-control" placeholder="" name="address">
-                                                            @error("address")
-                                                            <span class="text-danger">{{$message}}</span>
+                                                            <label for="projectinput1"> البريد الالكترونى </label>
+                                                            <input type="text" value="" id="email" class="form-control" placeholder="" name="email">
+                                                            @error("email")
+                                                            <span class="text-danger">{{$message}} </span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> البريد الالكترونى </label>
-                                                            <input type="text" value="" id="email" class="form-control" placeholder="" name="email">
-                                                            @error("email")
-                                                            <span class="text-danger">{{$message}} </span>
+                                                            <label for="projectinput1"> عنوان المتجر </label>
+                                                            <input type="text" value="" id="address" class="form-control" placeholder="" name="address">
+                                                            @error("address")
+                                                            <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>

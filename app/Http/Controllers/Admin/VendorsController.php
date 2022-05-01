@@ -6,6 +6,8 @@ use App\Models\Vendor;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VendorRequest;
+use PhpParser\Node\Stmt\TryCatch;
 
 class VendorsController extends Controller
 {
@@ -20,6 +22,8 @@ class VendorsController extends Controller
         return view('admin.vendors.vendors', compact('vendors'));
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,16 +37,73 @@ class VendorsController extends Controller
         return view('admin.vendors.createVendors', compact('categories'));
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VendorRequest $request)
     {
-        //
+        // return $request;
+
+        // Use Try Catch
+
+        try {
+
+            // Make Validation
+
+            // For save active
+
+            if (!$request->has('active'))
+                $request->request->add(['active' => 0]);
+            else
+                $request->request->add(['active' => 1]);
+
+            // For save logo
+
+            $filePath = "";
+            if ($request->has('logo')) {
+                // Use Helper Function "uploadImage"
+                // public/assets/images/vendors
+                // config/filesystems.php
+                $filePath = uploadImage('vendors', $request->logo);
+            }
+
+            // Insert to DB
+
+            $vendor = Vendor::create([
+                'logo' => $filePath,
+                'name' => $request->name,
+                'mobile' => $request->mobile,
+                'email' => $request->email,
+                'address' => $request->address,
+                'active' => $request->active,
+                'category_id' => $request->category_id,
+
+                // 'password' => $request->password,
+                // 'latitude' => $request->latitude,
+                // 'longitude' => $request->longitude,
+            ]);
+
+            // Notification::send($vendor, new VendorCreated($vendor));
+
+            // Redirect Message
+
+            return redirect()->route('admin.vendors')->with(['success' => 'تم الحفظ بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+            return $ex;
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Display the specified resource.
@@ -55,6 +116,8 @@ class VendorsController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -65,6 +128,8 @@ class VendorsController extends Controller
     {
         //
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Update the specified resource in storage.
@@ -78,6 +143,8 @@ class VendorsController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Remove the specified resource from storage.
      *
@@ -88,4 +155,6 @@ class VendorsController extends Controller
     {
         //
     }
+
+    // ------------------------------------------------------//
 }

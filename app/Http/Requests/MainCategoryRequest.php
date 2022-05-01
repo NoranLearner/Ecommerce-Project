@@ -36,6 +36,7 @@ class MainCategoryRequest extends FormRequest
     public function messages()
     {
         return [
+            'photo.required_without' => 'الصورة مطلوبة',
             'required' => 'هذا الحقل مطلوب',
             'string' => 'هذا الحقل لابد ان يكون احرف',
             // 'in' => 'القيم المدخلة غير صحيحة',
