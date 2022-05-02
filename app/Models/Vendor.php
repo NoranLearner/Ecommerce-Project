@@ -52,7 +52,7 @@ class Vendor extends Model
     }
 
     public function scopeSelection($query){
-        return $query -> select('id','category_id', 'name', 'logo', 'mobile', 'active', 'email', 'address');
+        return $query -> select('id','category_id', 'name', 'logo', 'mobile', 'active', 'email', 'address', 'password');
     }
 
     // For get photo from DB

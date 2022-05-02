@@ -131,7 +131,27 @@ class VendorsController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        try {
+
+            $vendor = Vendor::Selection()->find($id);
+
+            if (!$vendor)
+                return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود او ربما يكون محذوفا']);
+
+            $categories = MainCategory::where('translation_of', 0)->active()->get();
+
+            return view('admin.vendors.editVendors', compact('vendor', 'categories'));
+
+        }
+
+        catch(\Exception $ex){
+
+            return $ex;
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
+
     }
 
     // ------------------------------------------------------//
@@ -143,9 +163,8 @@ class VendorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VendorRequest $request, $id)
     {
-        //
     }
 
     // ------------------------------------------------------//
