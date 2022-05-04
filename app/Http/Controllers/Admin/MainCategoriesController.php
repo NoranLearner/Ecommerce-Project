@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\MainCategoryRequest;
 
@@ -245,6 +247,60 @@ class MainCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        try {
+            $mainCategory = MainCategory::find($id);
+
+            if (!$mainCategory)
+                return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+            // Use Relationship
+
+            $vendors = $mainCategory->vendors();
+
+            // Found vendor in category
+
+            if (isset($vendors) && $vendors->count() > 0) {
+                return redirect()->route('admin.mainCategories')->with(['error' => 'لا يمكن حذف هذا القسم']);
+            }
+
+            // No vendor in category
+
+            // /opt/lampp/htdocs/Ecommerce/assets/images/mainCategories/483ymAZJ5e0cfPuHaU8nJzWB6QRCvTgwhuUzMthu.jpg
+
+            $image = Str::after($mainCategory->photo, 'assets/');
+
+            // return $image;  // images/mainCategories/483ymAZJ5e0cfPuHaU8nJzWB6QRCvTgwhuUzMthu.jpg
+
+        /*
+            $image = base_path('assets/' . $image);
+
+            unlink($image);
+        */
+
+            //delete image from folder
+
+            //$image_path = "/images/filename.ext";  // Value is not URL but directory file path
+
+            if(File::exists($image)) {
+                File::delete($image);
+            }
+
+            // Delete category (For Ar Not For En & Fr)
+
+            $mainCategory->delete();
+
+            return redirect()->route('admin.mainCategories')->with(['success' => 'تم حذف القسم بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+            return $ex;
+            return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+
     }
+
+    // ------------------------------------------------------//
+
 }
