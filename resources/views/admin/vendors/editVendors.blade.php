@@ -64,7 +64,7 @@
 
                                             @csrf
 
-                                            <!-- No Validate For photo in edit form -->
+                                            <!-- No Validate For logo & password in edit form , Not required in edit form -->
                                             <input name="id" value="{{$vendor -> id}}" type="hidden">
 
                                             <!-- ------------------------------------- -->

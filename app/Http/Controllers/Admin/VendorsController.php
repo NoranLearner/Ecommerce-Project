@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Vendor;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VendorRequest;
 use App\Notifications\VendorCreated;
@@ -165,6 +165,71 @@ class VendorsController extends Controller
      */
     public function update(VendorRequest $request, $id)
     {
+
+        try {
+
+            // Validation
+
+            // Find vendor id
+
+            $vendor = Vendor::Selection()->find($id);
+
+            if (!$vendor)
+                return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود او ربما يكون محذوفا']);
+
+
+            DB::beginTransaction();
+
+            //Update Logo
+
+            if ($request->has('logo') ) {
+
+                // Use Helper Function "uploadImage"
+
+                $filePath = uploadImage('vendors', $request->logo);
+                Vendor::where('id', $id)->update([
+                        'logo' => $filePath,
+                ]);
+            }
+
+            // For update active
+
+            if (!$request->has('active'))
+                $request->request->add(['active' => 0]);
+            else
+                $request->request->add(['active' => 1]);
+
+            // Variable save vendor in it
+
+            $data = $request->except('_token', 'id', 'logo', 'password');
+
+            // For update password
+
+            if ($request->has('password') && !is_null($request->  password)) {
+
+                $data['password'] = $request->password;
+            }
+
+            // Update Data
+
+            Vendor::where('id', $id)->update(
+                    $data
+                );
+
+            DB::commit();
+
+            return redirect()->route('admin.vendors')->with(['success' => 'تم التحديث بنجاح']);
+
+        }
+
+        catch (\Exception $exception) {
+
+            return $exception;
+            DB::rollback();
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
+
     }
 
     // ------------------------------------------------------//

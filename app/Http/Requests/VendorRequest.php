@@ -27,8 +27,10 @@ class VendorRequest extends FormRequest
             // Logo required in create , Not for update
             'logo' => 'required_without:id|mimes:jpg,jpeg,png',
             'name' => 'required|string|max:150',
-            'mobile' => 'required|max:100|unique:vendors,mobile',
-            'email' => 'required|email|max:100|unique:vendors,email',
+            // mobile unique except for this id
+            'mobile' => 'required|max:100|unique:vendors,mobile,'.$this -> id,
+            // email unique except for this id
+            'email' => 'required|email|max:100|unique:vendors,email,'.$this -> id,
             'password'   => 'required_without:id|string|min:6',
             'address' => 'required|string|max:500',
             // category_id must be in main_categories table which is id
