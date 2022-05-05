@@ -303,4 +303,29 @@ class MainCategoriesController extends Controller
 
     // ------------------------------------------------------//
 
+    public function changeStatus($id)
+    {
+        try {
+
+            $mainCategory = MainCategory::find($id);
+
+            if (!$mainCategory)
+                return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+            $status =  $mainCategory -> active  == 0 ? 1 : 0;
+
+            $mainCategory -> update(['active' =>$status ]);
+
+            return redirect()->route('admin.mainCategories')->with(['success' => ' تم تغيير الحالة بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+            return $ex;
+            return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
+    // ------------------------------------------------------//
+
 }

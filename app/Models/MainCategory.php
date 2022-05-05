@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Observers\MainCategoryObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MainCategory extends Model
 {
@@ -32,6 +33,14 @@ class MainCategory extends Model
         'created_at',
         'updated_at'
     ];
+
+// *******************  For Observer ******************* //
+
+    protected static function boot()
+    {
+        parent::boot();
+        MainCategory::observe(MainCategoryObserver::class);
+    }
 
 // *******************  Scope ******************* //
 

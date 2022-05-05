@@ -85,7 +85,13 @@
 
                                                                 <a href="{{ route( 'admin.mainCategories.edit', $mainCategory -> id ) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> تعديل </a>
 
-                                                                <a href="{{ route( 'admin.mainCategories.edit', $mainCategory -> id ) }}" class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1"> تفعيل </a>
+                                                                <a href="{{ route( 'admin.mainCategories.status', $mainCategory -> id ) }}" class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                    @if($mainCategory -> active == 0)
+                                                                        تفعيل
+                                                                        @else
+                                                                        الغاء التفعيل
+                                                                    @endif
+                                                                </a>
 
                                                                 <a href="{{ route('admin.mainCategories.delete', $mainCategory -> id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"> حذف </a>
 
