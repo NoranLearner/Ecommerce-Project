@@ -286,7 +286,12 @@ class MainCategoriesController extends Controller
                 File::delete($image);
             }
 
-            // Delete category (For Ar Not For En & Fr)
+            // Delete Translation (En , Fr)
+            // Use Relationship categories in MainCategory Model
+
+            $mainCategory-> categories() -> delete();
+
+            // Delete Main Category (AR)
 
             $mainCategory->delete();
 

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\VendorRequest;
 use App\Notifications\VendorCreated;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class VendorsController extends Controller
 {
@@ -242,7 +244,46 @@ class VendorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        try {
+
+            $vendor = Vendor::find($id);
+
+            if (!$vendor)
+                return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود']);
+
+            // Found products in vendor
+            // No products in vendor
+
+            $logo = Str::after($vendor->logo, 'assets/');
+
+            /* $logo = base_path('assets/' . $logo);
+
+            unlink($logo); */
+
+
+            //delete image from folder
+
+            //$image_path = "/images/filename.ext";  // Value is not URL but directory file path
+
+            if(File::exists($logo)) {
+                File::delete($logo);
+            }
+
+            // Delete Vendor
+
+            $vendor->delete();
+
+            return redirect()->route('admin.vendors')->with(['success' => 'تم حذف المتجر بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+            return $ex;
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+
+
     }
 
     // ------------------------------------------------------//
