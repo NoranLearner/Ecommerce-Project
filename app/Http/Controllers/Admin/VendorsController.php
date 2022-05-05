@@ -287,4 +287,29 @@ class VendorsController extends Controller
     }
 
     // ------------------------------------------------------//
+
+    public function changeStatus($id)
+    {
+        try {
+
+            $vendor = Vendor::find($id);
+
+            if (!$vendor)
+                return redirect()->route('admin.vendors')->with(['error' => 'هذا المتجر غير موجود']);
+
+            $status =  $vendor -> active  == 0 ? 1 : 0;
+
+            $vendor -> update(['active' =>$status ]);
+
+            return redirect()->route('admin.vendors')->with(['success' => ' تم تغيير الحالة بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+            return $ex;
+            return redirect()->route('admin.vendors')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
+
+    // ------------------------------------------------------//
 }
