@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\VendorsController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginAdminController;
+use App\Http\Controllers\Admin\SubCategoriesController;
 use App\Http\Controllers\Admin\MainCategoriesController;
 
 /*
@@ -78,6 +79,27 @@ Route::group(['namespace'=>'Admin', 'middleware' => 'auth:admin'], function() {
     });
 
     // ***************** End Main Categories Routes ****************** //
+
+    // ***************** Begin Sub Categories Routes ****************** //
+
+    Route::group(['prefix'=>'sub_categories'], function(){
+
+        Route::get('/', [SubCategoriesController::class, 'index'])->name('admin.subCategories');
+
+        Route::get('create', [SubCategoriesController::class, 'create'])->name('admin.subCategories.create');
+
+        Route::post('store', [SubCategoriesController::class, 'store'])->name('admin.subCategories.store');
+
+        Route::get('edit/{id}', [SubCategoriesController::class, 'edit'])->name('admin.subCategories.edit');
+
+        Route::post('update/{id}', [SubCategoriesController::class, 'update'])->name('admin.subCategories.update');
+
+        Route::get('delete/{id}', [SubCategoriesController::class, 'destroy'])->name('admin.subCategories.delete');
+
+        Route::get('changeStatus/{id}', [SubCategoriesController::class, 'changeStatus']) -> name('admin.subCategories.status');
+    });
+
+    // ***************** End Sub Categories Routes ****************** //
 
     // ***************** Begin Vendors Routes ****************** //
 

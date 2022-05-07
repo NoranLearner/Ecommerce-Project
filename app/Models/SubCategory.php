@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\SubCategory;
+use App\Models\MainCategory;
 use Laravel\Sanctum\HasApiTokens;
-use App\Observers\MainCategoryObserver;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MainCategory extends Model
+class SubCategory extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'main_categories';
+    protected $table = 'sub_categories';
 
     public $timestamps = true;
 
@@ -25,6 +25,8 @@ class MainCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'parent_id',
+        'category_id',
         'translation_lang',
         'translation_of',
         'name',
@@ -35,15 +37,9 @@ class MainCategory extends Model
         'updated_at'
     ];
 
-// *******************  For Observer ******************* //
+    // *******************  For Observer ******************* //
 
-    protected static function boot()
-    {
-        parent::boot();
-        MainCategory::observe(MainCategoryObserver::class);
-    }
-
-// *******************  Scope ******************* //
+    // *******************  Scope ******************* //
 
     // Get Active Languages
     public function scopeActive($query){
@@ -51,7 +47,7 @@ class MainCategory extends Model
     }
 
     public function scopeSelection($query){
-        return $query -> select('id', 'translation_lang', 'translation_of', 'name', 'slug', 'photo', 'active');
+        return $query -> select('id','parent_id','category_id', 'translation_lang', 'translation_of', 'name', 'slug', 'photo', 'active');
     }
 
     // For get photo from DB
@@ -64,11 +60,7 @@ class MainCategory extends Model
         return $this->active == 1 ? 'مفعل' : 'غير مفعل';
     }
 
-    public function scopeDefaultCategory($query){
-        return  $query -> where('translation_of',0);
-    }
-
-// *******************  Relationship ******************* //
+    // *******************  Relationship ******************* //
 
     // get all translation categories
 
@@ -81,8 +73,9 @@ class MainCategory extends Model
         return $this -> hasMany('App\Models\Vendor','category_id','id');
     }
 
-    public function subCategories(){
-        return $this -> hasMany(SubCategory::class,'category_id','id');
+    //get main category of subcategory
+    public function mainCategory(){
+        return $this -> belongsTo(MainCategory::class,'category_id','id');
     }
 
 

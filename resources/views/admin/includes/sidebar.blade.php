@@ -39,7 +39,8 @@
                     <i class="la la-sitemap"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">الاقسام الرئيسية</span>
                     <span class="badge badge badge-info badge-pill float-right mr-2">
-                        {{ App\Models\MainCategory::count() }}
+                        {{-- Use Scope in MainCategory Model --}}
+                        {{ App\Models\MainCategory::DefaultCategory()->count() }}
                     </span>
                 </a>
                 <ul class="menu-content">
@@ -48,6 +49,26 @@
                     </li>
                     <li>
                         <a class="menu-item" href="{{ route('admin.mainCategories.create') }}" data-i18n="nav.dash.crypto">اضافة قسم جديد</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-sitemap"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الاقسام الفرعية</span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+                        {{ App\Models\SubCategory::count() }}
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active">
+                        <a class="menu-item" href="{{ route('admin.subCategories') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.subCategories.create') }}" data-i18n="nav.dash.crypto">اضافة قسم فرعى جديد</a>
                     </li>
                 </ul>
             </li>

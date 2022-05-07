@@ -45,6 +45,7 @@ return [
         'mainCategories' => [
             'driver' => 'local',
             'root' => public_path('/assets/images/mainCategories/'),
+            // 'root' => public_path() . '/assets/images/mainCategories/',
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
@@ -52,6 +53,7 @@ return [
         'vendors' => [
             'driver' => 'local',
             'root' => public_path('/assets/images/vendors/'),
+            // 'root' => public_path() . '/assets/images/vendors/',
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
