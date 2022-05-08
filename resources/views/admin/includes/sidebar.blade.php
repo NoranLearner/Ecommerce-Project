@@ -95,6 +95,35 @@
 
             <!-- ====================================================== -->
 
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-cog"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الاعدادات</span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active">
+                        <a class="menu-item" href="" data-i18n="nav.dash.ecommerce">وسائل التوصيل</a>
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.dash.main">توصيل مجانى</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.dash.main">توصيل داخلى</a>
+                            </li>
+                            <li>
+                                <a class="menu-item" href="" data-i18n="nav.dash.main">توصيل خارجى</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
         </ul>
 
     </div>
