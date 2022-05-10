@@ -29,11 +29,11 @@ class Setting extends Model
      * @var array
      */
 
-    // For Datatables Package
+    // For Datatables , laravel-translatable Package
 
     protected $with = ['translations'];
 
-    // For Datatables Package
+    // For Datatables , laravel-translatable Package
 
     protected $translatedAttributes = ['value'];
 

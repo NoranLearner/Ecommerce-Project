@@ -35,10 +35,10 @@ class SettingSeeder extends Seeder
             // التوصيل المجانى
             'free_shipping_cost' => 0,
             'translatable' => [
-                'store_name' => 'Noran Shop',
-                'free_shipping_label' => 'Free shipping',
-                'local_label' => 'local shipping',
-                'outer_label' => 'outer shipping',
+                'store_name' => 'متجر امامى',
+                'free_shipping_label' => 'توصيل مجاني',
+                'local_label' => 'توصيل داخلي',
+                'outer_label' => 'توصيل خارجي',
             ],
         ]);
 

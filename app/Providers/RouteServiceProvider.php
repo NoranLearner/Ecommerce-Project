@@ -54,8 +54,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/front.php'));
 
             // Admin Routes
-            Route::prefix('admin')
-                ->middleware('web')
+            Route::middleware('web')
+                // ->prefix('admin')  // Cause Problem in Mcamara
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
         });
