@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingsRequest;
 
 class SettingsController extends Controller
 {
@@ -97,28 +99,45 @@ class SettingsController extends Controller
      */
     // public function update(Request $request, $id){}
 
-    public function updateShippingMethods(Request $request, $id)
+    public function updateShippingMethods(ShippingsRequest $request, $id)
     {
+        // return $request;
 
-        //validation   ShippingsRequest
+        //validation
 
         //update db
 
-        /* try {
+        try {
+
             $shipping_method = Setting::find($id);
 
             DB::beginTransaction();
-            $shipping_method->update(['plain_value' => $request->plain_value]);
-            //save translations
-            $shipping_method->value = $request->value;
-            $shipping_method->save();
+
+            $shipping_method -> update(['plain_value' => $request -> plain_value]);
+
+            // ********* start save translations ********* //
+
+            $shipping_method -> value = $request -> value;
+
+            $shipping_method -> save();
+
+            // ********* end save translations ********* //
 
             DB::commit();
-            return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
-        } catch (\Exception $ex) {
-            return redirect()->back()->with(['error' => 'هناك خطا ما يرجي المحاولة فيما بعد']);
+
+            return redirect() -> back() -> with(['success' => 'تم التحديث بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return $ex;
+
             DB::rollback();
-        } */
+
+            return redirect() -> back() -> with(['error' => 'هناك خطا ما يرجي المحاولة فيما بعد']);
+
+        }
 
     }
 

@@ -61,29 +61,11 @@
 
                                             @csrf
 
+                                            {{-- For Use PUT Not POST --}}
+                                            @method('PUT')
+
                                             <!-- No Validate For logo & password in edit form , Not required in edit form -->
                                             <input name="id" value="{{$shippingMethod -> id}}" type="hidden">
-
-                                            <!-- ------------------------------------- -->
-
-                                            {{-- <div class="form-group">
-                                                <div class="text-center">
-                                                    <img
-                                                        src="{{$vendor -> logo}}"
-                                                        class="height-150" alt="لوجو المتجر">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label> لوجو المتجر </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="logo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                                                @error('logo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div> --}}
 
                                             <!-- ------------------------------------- -->
 
@@ -126,7 +108,7 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    <i class="la la-check-square-o"></i> حفظ
                                                 </button>
                                             </div>
 
