@@ -18,6 +18,8 @@ class LoginAdminController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Show the form for creating a new resource.
      *
@@ -27,6 +29,8 @@ class LoginAdminController extends Controller
     {
         //
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Store a newly created resource in storage.
@@ -39,6 +43,8 @@ class LoginAdminController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Display the specified resource.
      *
@@ -50,6 +56,8 @@ class LoginAdminController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,6 +68,8 @@ class LoginAdminController extends Controller
     {
         //
     }
+
+    // ------------------------------------------------------//
 
     /**
      * Update the specified resource in storage.
@@ -73,6 +83,8 @@ class LoginAdminController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /**
      * Remove the specified resource from storage.
      *
@@ -84,12 +96,16 @@ class LoginAdminController extends Controller
         //
     }
 
+    // ------------------------------------------------------//
+
     /** For Admin Login**/
 
     public function getLogin()
     {
         return view('admin.auth.login');
     }
+
+    // ------------------------//
 
     public function postLogin(LoginAdminRequest $request)
     {
@@ -109,5 +125,29 @@ class LoginAdminController extends Controller
         // notify()->error('خطا في البيانات  برجاء المجاولة مجددا ');
         return redirect()->back()->with(['error' => 'هناك خطا فى البيانات']);
     }
+
+    // ------------------------------------------------------//
+
+    /** For Admin Login**/
+
+    private function getGuard()
+    {
+        return auth('admin');
+    }
+
+    // ------------------------//
+
+    public function logout()
+    {
+
+        $guard = $this->getGuard();
+        $guard -> logout();
+
+        return redirect()->route('admin.getLogin');
+    }
+
+    // ------------------------------------------------------//
+
+
 
 }

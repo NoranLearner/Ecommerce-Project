@@ -55,6 +55,10 @@ Route::group([
 
         Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+        // For Admin Logout
+
+        Route::get('logout', [LoginAdminController::class, 'logout'])->name('admin.logout');
+
         // ***************** Begin Languages Routes ****************** //
 
         Route::group(['prefix'=>'languages'], function(){
