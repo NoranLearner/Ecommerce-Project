@@ -4,6 +4,7 @@ use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VendorsController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -58,6 +59,18 @@ Route::group([
         // For Admin Logout
 
         Route::get('logout', [LoginAdminController::class, 'logout'])->name('admin.logout');
+
+        // ***************** Begin Admin Profile Routes ****************** //
+
+        Route::group(['prefix'=>'profile'], function(){
+
+            Route::get('edit', [ProfileController::class, 'edit'])->name('edit.profile');
+
+            Route::put('update', [ProfileController::class, 'update'])->name('update.profile');
+
+        });
+
+        // ***************** End Admin Profile Routes ****************** //
 
         // ***************** Begin Languages Routes ****************** //
 
@@ -158,6 +171,8 @@ Route::group([
     // =================================================================================== //
 
     Route::group(['namespace'=>'Admin', 'middleware' => 'guest:admin', 'prefix' => 'admin'], function() {
+
+        // For Admin Login
 
         Route::get('login', [LoginAdminController::class, 'getLogin'])->name('admin.getLogin');
 

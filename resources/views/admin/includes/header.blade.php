@@ -65,7 +65,8 @@
 
                     <li class="dropdown dropdown-user nav-item">
 
-                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                        {{-- dropdown-user-link --}}
+                        <a class="dropdown-toggle nav-link nav-link-label" href="#" data-toggle="dropdown">
 
                             <span class="mr-1">مرحبا
                                 <span class="user-name text-bold-700">
@@ -85,7 +86,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right">
 
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item" href="{{ route('edit.profile') }}">
                                 <i class="ft-user"></i> تعديل الملف الشخصي
                             </a>
 
@@ -144,7 +145,7 @@
 
                             <i class="ficon ft-bell"></i>
 
-                            <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">5</span>
+                            {{-- <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">5</span> --}}
 
                         </a>
 
