@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
@@ -20,13 +21,27 @@ class MainCategoriesController extends Controller
      */
     public function index()
     {
+        // 🔥 For Unpaid 🔥 //
+
+/*
         // Use Helper Function
+
         $default_lang = getDefaultLang();
 
         // Use Scope In MainCategory Model
+
         $mainCategories = MainCategory::where('translation_lang', $default_lang)-> Selection() -> get();
 
         return view('admin.mainCategories.mainCategories', compact('mainCategories'));
+ */
+
+        // 🔥 For Paid 🔥 //
+
+        // Use Scope scopeParent in Category Model
+
+        $categories = Category::Parent() -> paginate(PAGINATION_COUNT);
+
+        return view('admin.mainCategories.mainCategories', compact('categories'));
     }
 
     // ------------------------------------------------------//
@@ -162,6 +177,10 @@ class MainCategoriesController extends Controller
      */
     public function edit($id)
     {
+
+        // 🔥 For Unpaid 🔥 //
+
+/*
         // categories - relationship in model MainCategory
         // get specific categories and its translations
 
@@ -171,6 +190,18 @@ class MainCategoriesController extends Controller
         return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
 
         return view('admin.mainCategories.editMainCategories', compact('mainCategory'));
+ */
+
+        // 🔥 For Paid 🔥 //
+
+        //get specific categories and its translations
+
+        $category = Category::orderBy('id', 'DESC')->find($id);
+
+        if (!$category)
+            return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+        return view('admin.mainCategories.editMainCategories', compact('category'));
     }
 
     // ------------------------------------------------------//
@@ -184,6 +215,9 @@ class MainCategoriesController extends Controller
      */
     public function update(MainCategoryRequest $request, $id)
     {
+
+        // 🔥 For Unpaid 🔥 //
+/*
         try {
 
             // Validation
@@ -235,6 +269,48 @@ class MainCategoriesController extends Controller
             return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
 
         }
+ */
+
+        // 🔥 For Paid 🔥 //
+
+        try {
+
+            // Validation
+
+            // Find Main id
+
+            $category = Category::find($id);
+
+            if (!$category)
+                return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+            // For update active
+
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
+
+            // Update Data
+
+            $category->update($request->all());
+
+            // Save Translations
+
+            $category->name = $request->name;
+            $category->save();
+
+
+            return redirect()->route('admin.mainCategories')->with(['success' => 'تم ألتحديث بنجاح']);
+
+        }
+
+        catch(\Exception $ex){
+
+            return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
+
     }
 
     // ------------------------------------------------------//

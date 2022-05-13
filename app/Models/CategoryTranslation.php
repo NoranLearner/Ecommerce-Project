@@ -7,11 +7,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class SettingTranslation extends Model
+class CategoryTranslation extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'setting_translations';
+    protected $table = 'category_translations';
 
     public $timestamps = true;
 
@@ -23,9 +23,9 @@ class SettingTranslation extends Model
      * @var array<int, string>
      */
 
+    // protected $fillable = ['name'];
+
     // *******************  Scope ******************* //
 
     // *******************  Relationship ******************* //
-
-
 }

@@ -28,6 +28,7 @@
             <div class="content-body">
 
                 <!-- DOM - jQuery events table -->
+
                 <section id="dom">
 
                     <div class="row">
@@ -60,6 +61,9 @@
                                         <table class="table display nowrap table-striped table-bordered scroll-horizontal">
 
                                             <thead>
+
+                                                {{-- 🔥 For Unpaid 🔥 --}}
+{{--
                                                 <tr>
                                                     <th>اسم القسم</th>
                                                     <th>اختصار اللغة</th>
@@ -67,39 +71,100 @@
                                                     <th>الحالة</th>
                                                     <th>الإجراءات</th>
                                                 </tr>
+--}}
+                                                {{-- 🔥 For Paid 🔥 --}}
+
+                                                <th>الاسم</th>
+                                                <th>القسم الرئيسي</th>
+                                                <th> الاسم بالرابط</th>
+                                                <th>صوره القسم</th>
+                                                <th>الحالة</th>
+                                                <th>الإجراءات</th>
+
                                             </thead>
 
                                             <tbody>
-                                            @isset($mainCategories)
-                                                @foreach($mainCategories as $mainCategory)
-                                                    <tr>
-                                                        <td>{{$mainCategory -> name}}</td>
-                                                        {{-- <td>{{$mainCategory -> translation_lang}}</td> --}}
-                                                        {{-- OR Use Helper Function --}}
-                                                        <td>{{getDefaultLang()}}</td>
-                                                        <td> <img src="{{$mainCategory -> photo}}" alt="" style="width: 100px; height: 100px;"> </td>
-                                                        <!-- In Main Category Model -->
-                                                        <td>{{$mainCategory -> getActive()}}</td>
-                                                        <td>
-                                                            <div class="btn-group" role="group" aria-label="Basic example">
 
-                                                                <a href="{{ route( 'admin.mainCategories.edit', $mainCategory -> id ) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> تعديل </a>
+                                                {{-- 🔥 For Unpaid 🔥 --}}
+                                                {{-- @isset($mainCategories) --}}
 
-                                                                <a href="{{ route( 'admin.mainCategories.status', $mainCategory -> id ) }}" class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                    @if($mainCategory -> active == 0)
-                                                                        تفعيل
-                                                                        @else
-                                                                        الغاء التفعيل
-                                                                    @endif
-                                                                </a>
+                                                {{-- 🔥 For Paid 🔥 --}}
+                                                @isset($categories)
 
-                                                                <a href="{{ route('admin.mainCategories.delete', $mainCategory -> id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"> حذف </a>
+                                                    {{-- 🔥 For Unpaid 🔥 --}}
+                                                    {{-- @foreach($mainCategories as $mainCategory) --}}
 
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endisset
+                                                    {{-- 🔥 For Paid 🔥 --}}
+                                                    @foreach($categories as $category)
+
+                                                        <tr>
+
+                                                            {{-- 🔥 For Unpaid 🔥 --}}
+                                                            {{-- <td>{{$mainCategory -> name}}</td> --}}
+
+                                                            {{-- 🔥 For Paid 🔥 --}}
+                                                            <td>{{$category -> name}}</td>
+
+                                                            {{-- 🔥 For Unpaid 🔥 --}}
+                                                            {{-- <td>{{$mainCategory -> translation_lang}}</td> --}}
+                                                            {{-- OR Use Helper Function --}}
+                                                            {{-- <td>{{getDefaultLang()}}</td> --}}
+
+                                                            {{-- 🔥 For Paid 🔥 --}}
+                                                            <td>{{$category -> _parent -> name  ?? '--' }}</td>
+
+                                                            {{-- 🔥 For Paid 🔥 --}}
+                                                            <td>{{$category -> slug}}</td>
+
+                                                            {{-- 🔥 For Unpaid 🔥 --}}
+                                                            {{-- <td> <img src="{{$mainCategory -> photo}}" alt="" style="width: 100px; height: 100px;"> </td> --}}
+
+                                                            {{-- 🔥 For Paid 🔥 --}}
+                                                            <td> <img style="width: 150px; height: 100px;" src=" "></td>
+
+                                                            {{-- 🔥 For Unpaid 🔥 --}}
+                                                            {{-- In Main Category Model --}}
+                                                            {{-- <td>{{$mainCategory -> getActive()}}</td> --}}
+
+                                                            {{-- 🔥 For Paid 🔥 --}}
+                                                            <td>{{$category -> getActive()}}</td>
+
+                                                            <td>
+
+                                                                {{-- 🔥 For Unpaid 🔥 --}}
+                                                                {{-- <div class="btn-group" role="group" aria-label="Basic example">
+
+                                                                    <a href="{{ route( 'admin.mainCategories.edit', $mainCategory -> id ) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> تعديل </a>
+
+                                                                    <a href="{{ route( 'admin.mainCategories.status', $mainCategory -> id ) }}" class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                        @if($mainCategory -> active == 0)
+                                                                            تفعيل
+                                                                            @else
+                                                                            الغاء التفعيل
+                                                                        @endif
+                                                                    </a>
+
+                                                                    <a href="{{ route('admin.mainCategories.delete', $mainCategory -> id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"> حذف </a>
+
+                                                                </div> --}}
+
+                                                                {{-- 🔥 For Paid 🔥 --}}
+                                                                <div class="btn-group" role="group" aria-label="Basic example">
+
+                                                                    <a href="{{ route( 'admin.mainCategories.edit', $category -> id ) }}" class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1"> تعديل </a>
+
+                                                                    <a href="{{ route('admin.mainCategories.delete', $category -> id) }}" class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1"> حذف </a>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    @endforeach
+
+                                                @endisset
+
                                             </tbody>
 
                                         </table>

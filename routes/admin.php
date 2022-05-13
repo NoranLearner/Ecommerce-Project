@@ -25,6 +25,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
+// 🔥 For Unpaid 🔥 //
+
 define('PAGINATION_COUNT',10);
 
 // =================================================================================== //
@@ -91,7 +93,7 @@ Route::group([
 
         // ***************** End Languages Routes ****************** //
 
-        // ***************** Begin Main Categories Routes ****************** //
+        // ***************** Begin Main Categories Routes (For Unpaid & Paid) ****************** //
 
         Route::group(['prefix'=>'main_categories'], function(){
 
@@ -106,6 +108,8 @@ Route::group([
             Route::post('update/{id}', [MainCategoriesController::class, 'update'])->name('admin.mainCategories.update');
 
             Route::get('delete/{id}', [MainCategoriesController::class, 'destroy'])->name('admin.mainCategories.delete');
+
+            // 🔥 For Unpaid 🔥 //
 
             Route::get('changeStatus/{id}', [MainCategoriesController::class, 'changeStatus']) -> name('admin.mainCategories.status');
         });

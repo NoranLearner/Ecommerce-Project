@@ -40,7 +40,10 @@
                             <div class="card">
 
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">  تعديل قسم - {{$mainCategory-> name}} </h4>
+                                    {{-- 🔥 For Unpaid 🔥 --}}
+                                    {{-- <h4 class="card-title" id="basic-layout-form">  تعديل قسم - {{$mainCategory-> name}} </h4> --}}
+                                    {{-- 🔥 For Paid 🔥 --}}
+                                    <h4 class="card-title" id="basic-layout-form">  تعديل قسم {{$category -> name}} </h4>
                                     <a class="heading-elements-toggle">
                                         <i class="la la-ellipsis-v font-medium-3"></i>
                                     </a>
@@ -62,20 +65,53 @@
 
                                         <!-- ********************************************************************** -->
 
-                                        <form class="form" action="{{route('admin.mainCategories.update',$mainCategory -> id)}}" method="POST" enctype="multipart/form-data">
+                                        {{-- 🔥 For Unpaid 🔥 --}}
+                                        {{-- <form class="form" action="{{route('admin.mainCategories.update',$mainCategory -> id)}}" method="POST" enctype="multipart/form-data"> --}}
+                                        {{-- 🔥 For Paid 🔥 --}}
+                                        <form class="form" action="{{route('admin.mainCategories.update',$category -> id)}}" method="POST" enctype="multipart/form-data">
 
                                             @csrf
 
                                             <!-- No Validate For photo in edit form -->
-                                            <input name="id" value="{{$mainCategory -> id}}" type="hidden">
+
+                                            {{-- 🔥 For Unpaid 🔥 --}}
+
+                                            {{-- <input name="id" value="{{$mainCategory -> id}}" type="hidden"> --}}
+
+                                            {{-- 🔥 For Paid 🔥 --}}
+
+                                            <input name="id" value="{{$category -> id}}" type="hidden">
 
                                             <!-- ------------------------------------- -->
 
-                                            <div class="form-group">
+                                            {{-- 🔥 For Unpaid 🔥 --}}
+
+                                            {{-- <div class="form-group">
                                                 <div class="text-center">
                                                     <img
                                                         src="{{$mainCategory -> photo}}"
                                                         class="height-150" alt="صورة القسم">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label> صوره القسم </label>
+                                                <label id="projectinput7" class="file center-block">
+                                                    <input type="file" id="file" name="photo">
+                                                    <span class="file-custom"></span>
+                                                </label>
+                                                @error('photo')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div> --}}
+
+                                            {{-- 🔥 For Paid 🔥 --}}
+
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <img
+                                                        src=""
+                                                        class="rounded-circle  height-150" alt="صورة القسم">
                                                 </div>
                                             </div>
 
@@ -100,22 +136,51 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-md-12">
+                                                    {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                    {{-- <div class="col-md-12">
                                                         <div class="form-group">
-                                                            {{-- Use Translation file - resources/lang --}}
+                                                            <!-- Use Translation file - resources/lang -->
                                                             <label for="projectinput1"> اسم القسم - {{__('messages.'.$mainCategory -> translation_lang)}}</label>
                                                             <input type="text" value="{{ $mainCategory -> name }}" id="name" class="form-control" placeholder="" name="category[0][name]">
                                                             @error("category.0.name")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
+                                                    </div> --}}
+
+                                                    {{-- 🔥 For Paid 🔥 --}}
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            {{-- Use Translation file - resources/lang --}}
+                                                            <label for="projectinput1">اسم القسم</label>
+                                                            <input type="text" value="{{$category -> name}}" id="name" class="form-control" placeholder="" name="name">
+                                                            @error("name")
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-md-6 hidden">
+                                                    {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                    {{-- <div class="col-md-6 hidden">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> أختصار اللغة - {{__('messages.'.$mainCategory -> translation_lang)}}</label>
                                                             <input type="text" value="{{ $mainCategory -> translation_lang }}" id="abbr" class="form-control" placeholder="" name="category[0][abbr]">
                                                             @error("category.0.abbr")
+                                                            <span class="text-danger">{{$message}} </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div> --}}
+
+                                                    {{-- 🔥 For Paid 🔥 --}}
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">الاسم بالرابط</label>
+                                                            <input type="text" value="{{$category -> slug}}" id="slug" class="form-control" placeholder="" name="slug">
+                                                            @error("slug")
                                                             <span class="text-danger">{{$message}} </span>
                                                             @enderror
                                                         </div>
@@ -125,13 +190,29 @@
 
                                                 <!-- ------------------------------------- -->
 
-                                                <div class="row">
+                                                {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                {{-- <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
                                                             <label for="switcheryColor4" class="card-title mr-1"> الحالة - {{__('messages.'.$mainCategory -> translation_lang)}}</label>
-                                                            {{-- Use Scope In Language Model --}}
+                                                            <!-- Use Scope In Language Model -->
                                                             <input type="checkbox" value="1" name="category[0][active]" id="switcheryColor4" class="switchery" data-color="success" @if($mainCategory -> active == 1)checked @endif/>
                                                             @error("category.0.active")
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+
+                                                {{-- 🔥 For Paid 🔥 --}}
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+                                                            <label for="switcheryColor4" class="card-title mr-1">الحالة</label>
+                                                            <input type="checkbox" value="1" name="is_active" id="switcheryColor4" class="switchery" data-color="success" @if($category -> is_active == 1)checked @endif/>
+                                                            @error("is_active")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -154,10 +235,14 @@
                                         </form>
 
                                         <!-- ********************************************************************** -->
+                                        <!-- ********************************************************************** -->
+                                        <!-- ********************************************************************** -->
+
+                                        {{-- 🔥 For Unpaid 🔥 --}}
 
                                         {{-- For Edit Other Languages --}}
 
-                                        <ul class="nav nav-tabs">
+                                        {{--<ul class="nav nav-tabs">
 
                                             <!-- ------------------------------------- -->
 
@@ -183,30 +268,30 @@
 
                                             <!-- ------------------------------------- -->
 
-                                        </ul>
+                                        </ul>--}}
 
                                         <!-- ------------------------------------- -->
 
-                                        <div class="tab-content px-1 pt-1">
+                                        {{-- <div class="tab-content px-1 pt-1"> --}}
 
                                             <!-- ------------------------------------- -->
 
-                                            @isset($mainCategory -> categories)
+                                            {{-- @isset($mainCategory -> categories) --}}
 
-                                            @foreach($mainCategory -> categories   as $index =>  $translation)
-
-                                            <!-- ------------------------------------- -->
-
-                                            <div role="tabpanel" class="tab-pane @if($index ==  0) active  @endif" id="homeLable{{$index}}" aria-labelledby="homeLable-tab" aria-expanded="{{$index ==  0 ? 'true' : 'false'}}">
+                                            {{-- @foreach($mainCategory -> categories   as $index =>  $translation) --}}
 
                                             <!-- ------------------------------------- -->
 
-                                            <form class="form" action="{{route('admin.mainCategories.update', $translation -> id)}}" method="POST" enctype="multipart/form-data">
+                                            {{-- <div role="tabpanel" class="tab-pane @if($index ==  0) active  @endif" id="homeLable{{$index}}" aria-labelledby="homeLable-tab" aria-expanded="{{$index ==  0 ? 'true' : 'false'}}"> --}}
 
-                                                @csrf
+                                            <!-- ------------------------------------- -->
+
+                                            {{-- <form class="form" action="{{route('admin.mainCategories.update', $translation -> id)}}" method="POST" enctype="multipart/form-data"> --}}
+
+                                                {{-- @csrf --}}
 
                                                 <!-- No Validate For photo in edit form -->
-                                                <input name="id" value="{{$translation -> id}}" type="hidden">
+                                                {{-- <input name="id" value="{{$translation -> id}}" type="hidden"> --}}
 
                                                 <!-- ------------------------------------- -->
 
@@ -231,17 +316,17 @@
 
                                                 <!-- ------------------------------------- -->
 
-                                                <div class="form-body">
+                                                {{-- <div class="form-body"> --}}
 
-                                                    <h4 class="form-section"> <i class="ft-home"></i> بيانات  القسم </h4>
+                                                    {{-- <h4 class="form-section"> <i class="ft-home"></i> بيانات  القسم </h4> --}}
 
                                                     <!-- ------------------------------------- -->
 
-                                                    <div class="row">
+                                                    {{-- <div class="row">
 
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                {{-- Use Translation file - resources/lang --}}
+                                                                <!-- Use Translation file - resources/lang -->
                                                                 <label for="projectinput1"> اسم القسم - {{__('messages.'.$translation -> translation_lang)}}</label>
                                                                 <input type="text" value="{{ $translation -> name }}" id="name" class="form-control" placeholder="" name="category[0][name]">
                                                                 @error("category.0.name")
@@ -260,52 +345,54 @@
                                                             </div>
                                                         </div>
 
-                                                    </div>
+                                                    </div> --}}
 
                                                     <!-- ------------------------------------- -->
 
-                                                    <div class="row">
+                                                    {{-- <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group mt-1">
                                                                 <label for="switcheryColor4" class="card-title mr-1"> الحالة - {{__('messages.'.$translation -> translation_lang)}}</label>
-                                                                {{-- Use Scope In Language Model --}}
+                                                                <!-- Use Scope In Language Model -->
                                                                 <input type="checkbox" value="1" name="category[0][active]" id="switcheryColor4" class="switchery" data-color="success" @if($translation -> active == 1)checked @endif/>
                                                                 @error("category.0.active")
                                                                 <span class="text-danger">{{$message}}</span>
                                                                 @enderror
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                     <!-- ------------------------------------- -->
 
-                                                </div>
+                                                {{-- </div> --}}
 
-                                                <div class="form-actions">
+                                                {{-- <div class="form-actions">
                                                     <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
                                                         <i class="ft-x"></i> تراجع
                                                     </button>
                                                     <button type="submit" class="btn btn-primary">
                                                         <i class="la la-check-square-o"></i> تحديث
                                                     </button>
-                                                </div>
+                                                </div> --}}
 
-                                            </form>
-
-                                            <!-- ------------------------------------- -->
-
-                                            </div>
+                                            {{-- </form> --}}
 
                                             <!-- ------------------------------------- -->
 
-                                            @endforeach
-
-                                            @endisset
+                                            {{-- </div> --}}
 
                                             <!-- ------------------------------------- -->
 
-                                        </div>
+                                            {{-- @endforeach --}}
 
+                                            {{-- @endisset --}}
+
+                                            <!-- ------------------------------------- -->
+
+                                        {{-- </div> --}}
+
+                                        <!-- ********************************************************************** -->
+                                        <!-- ********************************************************************** -->
                                         <!-- ********************************************************************** -->
 
                                     </div>

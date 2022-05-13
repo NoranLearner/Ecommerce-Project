@@ -3,6 +3,8 @@
 use App\Models\Language;
 use Illuminate\Support\Facades\Config;
 
+// 🔥 Start For Unpaid 🔥 //
+
 function getLanguages(){
     // Use Scope in Language Model
     return Language::Active() -> Selection() -> get();
@@ -28,9 +30,17 @@ function uploadVideo($folder, $video){
     return $path;
 }
 
+// 🔥 End For Unpaid 🔥 //
+
+
+// 🔥 Start For Paid 🔥 //
+
+// define('PAGINATION_COUNT', 10);
 
 // Use in resources/views/layouts/admin.blade.php - For change page direction
 
 function getFolder(){
     return app()->getLocale() == 'ar' ? 'css-rtl' : 'css';
 }
+
+// 🔥 End For Paid 🔥 //

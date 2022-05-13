@@ -24,22 +24,45 @@ class MainCategoryRequest extends FormRequest
     public function rules()
     {
         return [
+
+            // 🔥 For Unpaid 🔥 //
+
+            /*
             // Photo required in create , Not for update
             'photo' => 'required_without:id|mimes:jpg,jpeg,png',
             'category' => 'required|array|min:1',
             'category.*.name' => 'required|string',
             'category.*.abbr' => 'required|string',
             //'category.*.active' => 'required|in:0,1',
+            */
+
+            // 🔥 For Paid 🔥 //
+
+            'name' => 'required',
+            // 'type' => 'required|in:1,2',
+            'slug' => 'required|unique:categories,slug,'.$this -> id,
+
         ];
     }
 
     public function messages()
     {
         return [
+
+            // 🔥 For Unpaid 🔥 //
+
+            /*
             'photo.required_without' => 'الصورة مطلوبة',
             'required' => 'هذا الحقل مطلوب',
             'string' => 'هذا الحقل لابد ان يكون احرف',
             // 'in' => 'القيم المدخلة غير صحيحة',
+            */
+
+            // 🔥 For Paid 🔥 //
+            
+            'required' => 'هذا الحقل مطلوب',
+            'unique' => 'لقد تم استخدامه سابقا',
+
         ];
     }
 }
