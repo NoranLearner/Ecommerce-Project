@@ -76,14 +76,18 @@ class Category extends Model
         return $query -> whereNull('parent_id');
     }
 
-    public function getActive(){
-        return $this->is_active == 1 ? 'مفعل' : 'غير مفعل';
-    }
-
     public function scopeChild($query){
         return $query -> whereNotNull('parent_id');
     }
 
     // *******************  Relationship ******************* //
+
+    public function getActive(){
+        return $this->is_active == 1 ? 'مفعل' : 'غير مفعل';
+    }
+
+    public function _parent(){
+        return $this->belongsTo(self::class, 'parent_id');
+    }
 
 }

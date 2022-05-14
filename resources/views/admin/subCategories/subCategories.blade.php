@@ -65,7 +65,7 @@
                                                 {{-- 🔥 For Paid 🔥 --}}
 
                                                 <th>الاسم</th>
-                                                {{-- <th>القسم الرئيسي</th> --}}
+                                                <th>القسم الرئيسي</th>
                                                 <th> الاسم بالرابط</th>
                                                 <th>صوره القسم</th>
                                                 <th>الحالة</th>
@@ -87,7 +87,8 @@
                                                             <td>{{$category -> name}}</td>
 
                                                             {{-- 🔥 For Paid 🔥 --}}
-                                                            {{-- <td>{{$category -> _parent -> name  ?? '--' }}</td> --}}
+                                                            {{-- Use Relationship in Category Model --}}
+                                                            <td>{{$category -> _parent -> name  ?? '--' }}</td>
 
                                                             {{-- 🔥 For Paid 🔥 --}}
                                                             <td>{{$category -> slug}}</td>

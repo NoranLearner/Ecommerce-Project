@@ -75,6 +75,8 @@
 
                         {{-- 🔥 For Paid 🔥 --}}
 
+                        {{\App\Models\Category::Child() -> count()}}
+
                     </span>
                 </a>
                 <ul class="menu-content">

@@ -43,7 +43,7 @@
                                     {{-- 🔥 For Unpaid 🔥 --}}
                                     {{-- <h4 class="card-title" id="basic-layout-form">  تعديل قسم - {{$mainCategory-> name}} </h4> --}}
                                     {{-- 🔥 For Paid 🔥 --}}
-                                    <h4 class="card-title" id="basic-layout-form">  تعديل قسم {{$category -> name}} </h4>
+                                    <h4 class="card-title" id="basic-layout-form">  تعديل قسم - {{$category -> name}} </h4>
                                     <a class="heading-elements-toggle">
                                         <i class="la la-ellipsis-v font-medium-3"></i>
                                     </a>
@@ -109,9 +109,7 @@
 
                                             <div class="form-group">
                                                 <div class="text-center">
-                                                    <img
-                                                        src=""
-                                                        class="rounded-circle  height-150" alt="صورة القسم">
+                                                    <img src="" class="rounded-circle  height-150" alt="صورة القسم">
                                                 </div>
                                             </div>
 

@@ -462,8 +462,6 @@ class MainCategoriesController extends Controller
 
         catch (\Exception $ex) {
 
-            return $ex;
-
             return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
 
         }
