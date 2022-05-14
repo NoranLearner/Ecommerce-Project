@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubCategoriesController extends Controller
 {
@@ -14,8 +15,16 @@ class SubCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        // 🔥 For Paid 🔥 //
+
+        // Use Scope scopeChild in Category Model
+
+        $categories = Category::Child()->orderBy('id','DESC') -> paginate(PAGINATION_COUNT);
+
+        return view('admin.subCategories.subCategories', compact('categories'));
     }
+
+    // ------------------------------------------------------------------------//
 
     /**
      * Show the form for creating a new resource.
@@ -24,8 +33,10 @@ class SubCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        // 🔥 For Paid 🔥 //
     }
+
+    // ------------------------------------------------------------------------//
 
     /**
      * Store a newly created resource in storage.
@@ -35,8 +46,10 @@ class SubCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 🔥 For Paid 🔥 //
     }
+
+    // ------------------------------------------------------------------------//
 
     /**
      * Display the specified resource.
@@ -46,8 +59,10 @@ class SubCategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        // 🔥 For Paid 🔥 //
     }
+
+    // ------------------------------------------------------------------------//
 
     /**
      * Show the form for editing the specified resource.
@@ -57,8 +72,10 @@ class SubCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 🔥 For Paid 🔥 //
     }
+
+    // ------------------------------------------------------------------------//
 
     /**
      * Update the specified resource in storage.
@@ -69,8 +86,10 @@ class SubCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 🔥 For Paid 🔥 //
     }
+
+    // ------------------------------------------------------------------------//
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +99,8 @@ class SubCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 🔥 For Paid 🔥 //
     }
+
+    // ------------------------------------------------------------------------//
 }

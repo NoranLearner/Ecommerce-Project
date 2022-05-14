@@ -74,7 +74,7 @@ Route::group([
 
         // ***************** End Admin Profile Routes ****************** //
 
-        // ***************** Begin Languages Routes ****************** //
+        // ***************** Begin Languages Routes (For Unpaid)  ****************** //
 
         Route::group(['prefix'=>'languages'], function(){
 
@@ -116,7 +116,7 @@ Route::group([
 
         // ***************** End Main Categories Routes ****************** //
 
-        // ***************** Begin Sub Categories Routes ****************** //
+        // ***************** Begin Sub Categories Routes (For Unpaid & Paid) ****************** //
 
         Route::group(['prefix'=>'sub_categories'], function(){
 
@@ -131,6 +131,8 @@ Route::group([
             Route::post('update/{id}', [SubCategoriesController::class, 'update'])->name('admin.subCategories.update');
 
             Route::get('delete/{id}', [SubCategoriesController::class, 'destroy'])->name('admin.subCategories.delete');
+
+            // 🔥 For Unpaid 🔥 //
 
             Route::get('changeStatus/{id}', [SubCategoriesController::class, 'changeStatus']) -> name('admin.subCategories.status');
         });

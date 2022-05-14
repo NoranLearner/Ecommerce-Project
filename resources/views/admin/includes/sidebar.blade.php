@@ -39,8 +39,16 @@
                     <i class="la la-sitemap"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">{{ trans('admin/sidebar.MainCategories') }}</span>
                     <span class="badge badge badge-info badge-pill float-right mr-2">
+
+                        {{-- 🔥 For Unpaid 🔥 --}}
+
                         {{-- Use Scope in MainCategory Model --}}
-                        {{ App\Models\MainCategory::DefaultCategory()->count() }}
+                        {{-- {{ App\Models\MainCategory::DefaultCategory() -> count() }} --}}
+
+                        {{-- 🔥 For Paid 🔥 --}}
+
+                        {{\App\Models\Category::Parent() -> count()}}
+
                     </span>
                 </a>
                 <ul class="menu-content">
@@ -60,7 +68,13 @@
                     <i class="la la-sitemap"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">{{ trans('admin/sidebar.SubCategories') }}</span>
                     <span class="badge badge badge-info badge-pill float-right mr-2">
-                        {{ App\Models\SubCategory::count() }}
+
+                        {{-- 🔥 For Unpaid 🔥 --}}
+
+                        {{-- {{ App\Models\SubCategory::count() }} --}}
+
+                        {{-- 🔥 For Paid 🔥 --}}
+
                     </span>
                 </a>
                 <ul class="menu-content">
