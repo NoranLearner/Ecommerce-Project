@@ -85,32 +85,64 @@
 
                                                 <!-- ------------------------------------- -->
 
-                                                {{-- Helper Method - app/Helpers/General.php--}}
+                                                {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                {{--
+                                                <!-- Helper Method - app/Helpers/General.php-->
                                                 @if(getLanguages() -> count() > 0)
 
-                                                {{-- This Helper Method has Language Model Fields --}}
+                                                <!-- This Helper Method has Language Model Fields -->
                                                 @foreach(getLanguages() as $index => $lang)
+                                                --}}
 
                                                 <!-- ------------------------------------- -->
 
                                                 <div class="row">
 
-                                                    <div class="col-md-12">
+                                                    {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                    {{-- <div class="col-md-12">
                                                         <div class="form-group">
-                                                            {{-- Use Translation file - resources/lang --}}
+                                                            <!-- Use Translation file - resources/lang -->
                                                             <label for="projectinput1"> اسم القسم - {{__('messages.'.$lang -> abbr)}}</label>
                                                             <input type="text" value="" id="name" class="form-control" placeholder="" name="category[{{$index}}][name]">
                                                             @error("category.$index.name")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
+                                                    </div> --}}
+
+                                                    {{-- 🔥 For Paid 🔥 --}}
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">اسم القسم</label>
+                                                            <input type="text" value="{{old('name')}}" id="name" class="form-control" placeholder="" name="name">
+                                                            @error("name")
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-md-6 hidden">
+                                                    {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                    {{-- <div class="col-md-6 hidden">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> أختصار اللغة - {{__('messages.'.$lang -> abbr)}}</label>
                                                             <input type="text" value="{{ $lang -> abbr }}" id="abbr" class="form-control" placeholder="" name="category[{{$index}}][abbr]">
                                                             @error("category.$index.abbr")
+                                                            <span class="text-danger">{{$message}} </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div> --}}
+
+                                                    {{-- 🔥 For Paid 🔥 --}}
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">الاسم بالرابط</label>
+                                                            <input type="text" value="{{old('slug')}}" id="slug" class="form-control" placeholder="" name="slug">
+                                                            @error("slug")
                                                             <span class="text-danger">{{$message}} </span>
                                                             @enderror
                                                         </div>
@@ -120,24 +152,98 @@
 
                                                 <!-- ------------------------------------- -->
 
-                                                <div class="row">
+                                                {{-- 🔥 For Unpaid 🔥 --}}
+
+                                                {{-- <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
                                                             <label for="switcheryColor4" class="card-title mr-1"> الحالة - {{__('messages.'.$lang -> abbr)}}</label>
-                                                            {{-- Use Scope In Language Model --}}
+                                                            <!-- Use Scope In Language Model -->
                                                             <input type="checkbox" value="1" name="category[{{$index}}][active]" id="switcheryColor4" class="switchery" data-color="success" checked/>
                                                             @error("category.$index.active")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                </div> --}}
+
+                                                <!-- ------------------------------------- -->
+
+                                                {{-- 🔥 For Paid 🔥 --}}
+
+                                                <div class="row hidden" id="cats_list" >
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+
+                                                            <label for="projectinput1">اختر القسم الرئيسي</label>
+
+                                                            <select name="parent_id" class="select2 form-control">
+                                                                <optgroup label="من فضلك أختر القسم ">
+                                                                    @if($categories && $categories -> count() > 0)
+                                                                        @foreach($categories as $category)
+                                                                            <option value="{{$category -> id }}"> {{$category -> name}} </option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </optgroup>
+                                                            </select>
+
+                                                            @error('parent_id')
+                                                            <span class="text-danger"> {{$message}}</span>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <!-- ------------------------------------- -->
 
+                                                {{-- 🔥 For Paid 🔥 --}}
+
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group mt-1">
+
+                                                            <label for="switcheryColor4" class="card-title ml-1">الحالة</label>
+
+                                                            <input type="checkbox" value="1" name="is_active" id="switcheryColor4" class="switchery" data-color="success" checked/>
+
+                                                            @error("is_active")
+                                                                <span class="text-danger">{{$message }}</span>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+
+                                                            <label class="card-title ml-1"> قسم رئيسي </label>
+
+                                                            <input type="radio" name="type" value="1" checked class="switchery" data-color="success"/>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group mt-1">
+
+                                                            <label class="card-title ml-1"> قسم فرعي </label>
+
+                                                            <input type="radio" name="type" value="2" class="switchery" data-color="success"/>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- ------------------------------------- -->
+
+                                                {{--
                                                 @endforeach
 
                                                 @endif
+                                                --}}
 
                                                 <!-- ------------------------------------- -->
 
@@ -171,3 +277,23 @@
         </div>
     </div>
 @endsection
+
+
+{{-- 🔥 For Paid 🔥 --}}
+
+@section('script')
+
+    <script>
+
+        $('input:radio[name="type"]').change(
+            function(){
+                if (this.checked && this.value == '2') {  // 1 if main cat - 2 if sub cat
+                    $('#cats_list').removeClass('hidden');
+                }else{
+                    $('#cats_list').addClass('hidden');
+                }
+            });
+            
+    </script>
+
+@stop

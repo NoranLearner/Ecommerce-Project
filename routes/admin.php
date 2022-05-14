@@ -27,7 +27,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // 🔥 For Unpaid 🔥 //
 
-define('PAGINATION_COUNT',10);
+// define('PAGINATION_COUNT',10);
 
 // =================================================================================== //
 

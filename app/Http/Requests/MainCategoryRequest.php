@@ -39,7 +39,7 @@ class MainCategoryRequest extends FormRequest
             // 🔥 For Paid 🔥 //
 
             'name' => 'required',
-            // 'type' => 'required|in:1,2',
+            'type' => 'required|in:1,2',
             'slug' => 'required|unique:categories,slug,'.$this -> id,
 
         ];
@@ -59,10 +59,10 @@ class MainCategoryRequest extends FormRequest
             */
 
             // 🔥 For Paid 🔥 //
-            
-            'required' => 'هذا الحقل مطلوب',
-            'unique' => 'لقد تم استخدامه سابقا',
 
+            'required' => 'هذا الحقل مطلوب',
+            'in' => 'القيم المدخلة غير صحيحة',
+            'unique' => 'لقد تم استخدامه سابقا',
         ];
     }
 }

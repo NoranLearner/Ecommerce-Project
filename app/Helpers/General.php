@@ -35,7 +35,7 @@ function uploadVideo($folder, $video){
 
 // 🔥 Start For Paid 🔥 //
 
-// define('PAGINATION_COUNT', 10);
+define('PAGINATION_COUNT', 30);
 
 // Use in resources/views/layouts/admin.blade.php - For change page direction
 

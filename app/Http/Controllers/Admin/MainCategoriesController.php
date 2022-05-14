@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Config;
 use App\Http\Requests\MainCategoryRequest;
+// use App\Http\Enumerations\CategoryType;
 
 class MainCategoriesController extends Controller
 {
@@ -39,12 +40,12 @@ class MainCategoriesController extends Controller
 
         // Use Scope scopeParent in Category Model
 
-        $categories = Category::Parent() -> paginate(PAGINATION_COUNT);
+        $categories = Category::Parent() -> orderBy('id', 'DESC') -> paginate(PAGINATION_COUNT);
 
         return view('admin.mainCategories.mainCategories', compact('categories'));
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
     /**
      * Show the form for creating a new resource.
@@ -53,10 +54,19 @@ class MainCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.mainCategories.createMainCategories');
+        // 🔥 For Unpaid 🔥 //
+
+        // return view('admin.mainCategories.createMainCategories');
+
+        // 🔥 For Paid 🔥 //
+
+        $categories =   Category::select('id','parent_id')->get();
+
+        return view('admin.mainCategories.createMainCategories',compact('categories'));
+
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
     /**
      * Store a newly created resource in storage.
@@ -66,6 +76,10 @@ class MainCategoriesController extends Controller
      */
     public function store(MainCategoryRequest $request)
     {
+
+        // 🔥 For Unpaid 🔥 //
+
+        /*
         // Make Validation
 
         // return $request;
@@ -151,10 +165,55 @@ class MainCategoriesController extends Controller
             return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
 
         }
+        */
+
+        // 🔥 For Paid 🔥 //
+
+        try {
+
+            // Make Validation
+
+            DB::beginTransaction();
+
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
+
+            //if user choose main category then we must remove parent id from the request
+
+            /* if($request -> type == CategoryType::mainCategory) //main category
+            {
+                $request->request->add(['parent_id' => null]);
+            } */
+
+            //if user choose child category we must add parent id
+
+            $category = Category::create($request->except('_token'));
+
+            //save translations
+
+            $category->name = $request->name;
+
+            $category->save();
+
+            DB::commit();
+
+            return redirect()->route('admin.mainCategories')->with(['success' => 'تم الحفظ بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            DB::rollback();
+
+            return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
 
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
     /**
      * Display the specified resource.
@@ -167,7 +226,7 @@ class MainCategoriesController extends Controller
         //
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
     /**
      * Show the form for editing the specified resource.
@@ -204,7 +263,7 @@ class MainCategoriesController extends Controller
         return view('admin.mainCategories.editMainCategories', compact('category'));
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
     /**
      * Update the specified resource in storage.
@@ -313,7 +372,7 @@ class MainCategoriesController extends Controller
 
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
     /**
      * Remove the specified resource from storage.
@@ -324,6 +383,9 @@ class MainCategoriesController extends Controller
     public function destroy($id)
     {
 
+        // 🔥 For Unpaid 🔥 //
+
+/*
         try {
             $mainCategory = MainCategory::find($id);
 
@@ -348,11 +410,11 @@ class MainCategoriesController extends Controller
 
             // return $image;  // images/mainCategories/483ymAZJ5e0cfPuHaU8nJzWB6QRCvTgwhuUzMthu.jpg
 
-        /*
-            $image = base_path('assets/' . $image);
 
-            unlink($image);
-        */
+            // $image = base_path('assets/' . $image);
+
+            // unlink($image);
+
 
             //delete image from folder
 
@@ -379,12 +441,40 @@ class MainCategoriesController extends Controller
             return $ex;
             return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
+ */
+
+        // 🔥 For Paid 🔥 //
+
+        try {
+
+            //get specific categories and its translations
+
+            $category = Category::orderBy('id', 'DESC')->find($id);
+
+            if (!$category)
+                return redirect()->route('admin.mainCategories')->with(['error' => 'هذا القسم غير موجود']);
+
+            $category->delete();
+
+            return redirect()->route('admin.mainCategories')->with(['success' => 'تم الحذف بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return $ex;
+
+            return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
 
     }
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
-    public function changeStatus($id)
+    // 🔥 For Unpaid 🔥 //
+
+    /* public function changeStatus($id)
     {
         try {
 
@@ -405,8 +495,8 @@ class MainCategoriesController extends Controller
             return $ex;
             return redirect()->route('admin.mainCategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
-    }
+    } */
 
-    // ------------------------------------------------------//
+    // ------------------------------------------------------------------------//
 
 }

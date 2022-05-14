@@ -153,7 +153,6 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            {{-- Use Translation file - resources/lang --}}
                                                             <label for="projectinput1">اسم القسم</label>
                                                             <input type="text" value="{{$category -> name}}" id="name" class="form-control" placeholder="" name="name">
                                                             @error("name")
