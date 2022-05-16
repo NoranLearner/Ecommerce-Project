@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    اضافة قسم فرعى
+    تعديل القسم
 @stop
 
 @section('content')
@@ -18,9 +18,9 @@
                                     <a href="{{route('admin.dashboard')}}"> الرئيسية </a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{route('admin.subCategories')}}"> الاقسام الفرعية </a>
+                                    <a href="{{route('admin.languages')}}"> الاقسام الفرعية </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة قسم فرعى
+                                <li class="breadcrumb-item active"> تعديل القسم
                                 </li>
                             </ol>
                         </div>
@@ -40,7 +40,10 @@
                             <div class="card">
 
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة قسم فرعى </h4>
+                                    {{-- 🔥 For Unpaid 🔥 --}}
+                                    {{-- <h4 class="card-title" id="basic-layout-form">  تعديل قسم - {{$mainCategory-> name}} </h4> --}}
+                                    {{-- 🔥 For Paid 🔥 --}}
+                                    <h4 class="card-title" id="basic-layout-form">  تعديل قسم - {{$category -> name}} </h4>
                                     <a class="heading-elements-toggle">
                                         <i class="la la-ellipsis-v font-medium-3"></i>
                                     </a>
@@ -60,11 +63,28 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
 
-                                        <form class="form" action="{{route('admin.subCategories.store')}}" method="POST" enctype="multipart/form-data">
+                                        <!-- ********************************************************************** -->
+
+                                        {{-- 🔥 For Paid 🔥 --}}
+                                        <form class="form" action="{{route('admin.subCategories.update',$category -> id)}}" method="POST" enctype="multipart/form-data">
 
                                             @csrf
 
+                                            <!-- No Validate For photo in edit form -->
+
+                                            {{-- 🔥 For Paid 🔥 --}}
+
+                                            <input name="id" value="{{$category -> id}}" type="hidden">
+
                                             <!-- ------------------------------------- -->
+
+                                            {{-- 🔥 For Paid 🔥 --}}
+
+                                            <div class="form-group">
+                                                <div class="text-center">
+                                                    <img src="" class="rounded-circle  height-150" alt="صورة القسم">
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <label> صوره القسم </label>
@@ -96,8 +116,8 @@
                                                             <select name="parent_id" class="select2 form-control">
                                                                 <optgroup label="من فضلك أختر القسم الرئيسي">
                                                                     @if($categories && $categories -> count() > 0)
-                                                                        @foreach($categories as $category)
-                                                                            <option value="{{$category -> id }}"> {{$category -> name}} </option>
+                                                                        @foreach($categories as $mainCategory)
+                                                                            <option value="{{$mainCategory -> id }}" @if($mainCategory -> id == $category -> parent_id)  selected @endif > {{$mainCategory -> name}} </option>
                                                                         @endforeach
                                                                     @endif
                                                                 </optgroup>
@@ -120,7 +140,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1">اسم القسم الفرعى</label>
-                                                            <input type="text" value="{{old('name')}}" id="name" class="form-control" placeholder="" name="name">
+                                                            <input type="text" value="{{$category -> name}}" id="name" class="form-control" placeholder="" name="name">
                                                             @error("name")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -132,7 +152,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1">الاسم بالرابط</label>
-                                                            <input type="text" value="{{old('slug')}}" id="slug" class="form-control" placeholder="" name="slug">
+                                                            <input type="text" value="{{$category -> slug}}" id="slug" class="form-control" placeholder="" name="slug">
                                                             @error("slug")
                                                             <span class="text-danger">{{$message}} </span>
                                                             @enderror
@@ -146,21 +166,15 @@
                                                 {{-- 🔥 For Paid 🔥 --}}
 
                                                 <div class="row">
-
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
-
-                                                            <label for="switcheryColor4" class="card-title ml-1">الحالة</label>
-
-                                                            <input type="checkbox" value="1" name="is_active" id="switcheryColor4" class="switchery" data-color="success" checked/>
-
+                                                            <label for="switcheryColor4" class="card-title mr-1">الحالة</label>
+                                                            <input type="checkbox" value="1" name="is_active" id="switcheryColor4" class="switchery" data-color="success" @if($category -> is_active == 1)checked @endif/>
                                                             @error("is_active")
-                                                                <span class="text-danger">{{$message }}</span>
+                                                            <span class="text-danger">{{$message}}</span>
                                                             @enderror
-
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <!-- ------------------------------------- -->
@@ -172,7 +186,7 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
 

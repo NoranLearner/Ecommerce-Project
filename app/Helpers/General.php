@@ -16,12 +16,12 @@ function getDefaultLang(){
 }
 
 // config/filesystems.php
-function uploadImage($folder, $image){
+/* function uploadImage($folder, $image){
     $image->store('/', $folder);
     $filename = $image->hashName();
     $path = 'images/' . $folder . '/' . $filename;
     return $path;
-}
+} */
 
 function uploadVideo($folder, $video){
     $video->store('/', $folder);
@@ -41,6 +41,12 @@ define('PAGINATION_COUNT', 30);
 
 function getFolder(){
     return app()->getLocale() == 'ar' ? 'css-rtl' : 'css';
+}
+
+function uploadImage($folder,$image){
+    $image->store('/', $folder);
+    $filename = $image->hashName();
+    return  $filename;
 }
 
 // 🔥 End For Paid 🔥 //

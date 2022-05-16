@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    اضافة قسم فرعى
+    اضافة ماركة
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> الاقسام الفرعية </h3>
+                    <h3 class="content-header-title">الماركات التجارية</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
@@ -18,9 +18,9 @@
                                     <a href="{{route('admin.dashboard')}}"> الرئيسية </a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{route('admin.subCategories')}}"> الاقسام الفرعية </a>
+                                    <a href="{{route('admin.brands')}}">الماركات التجارية</a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة قسم فرعى
+                                <li class="breadcrumb-item active">إضافة ماركة
                                 </li>
                             </ol>
                         </div>
@@ -60,14 +60,14 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
 
-                                        <form class="form" action="{{route('admin.subCategories.store')}}" method="POST" enctype="multipart/form-data">
+                                        <form class="form" action="{{route('admin.brands.store')}}" method="POST" enctype="multipart/form-data">
 
                                             @csrf
 
                                             <!-- ------------------------------------- -->
 
                                             <div class="form-group">
-                                                <label> صوره القسم </label>
+                                                <label> صوره الماركة </label>
                                                 <label id="projectinput7" class="file center-block">
                                                     <input type="file" id="file" name="photo">
                                                     <span class="file-custom"></span>
@@ -81,45 +81,15 @@
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"> <i class="ft-home"></i> بيانات  القسم </h4>
-
-                                                <!-- ------------------------------------- -->
-
-                                                {{-- 🔥 For Paid 🔥 --}}
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-
-                                                            <label for="projectinput2">اختر القسم الرئيسي</label>
-
-                                                            <select name="parent_id" class="select2 form-control">
-                                                                <optgroup label="من فضلك أختر القسم الرئيسي">
-                                                                    @if($categories && $categories -> count() > 0)
-                                                                        @foreach($categories as $category)
-                                                                            <option value="{{$category -> id }}"> {{$category -> name}} </option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-
-                                                            @error('parent_id')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <h4 class="form-section"> <i class="ft-home"></i> بيانات  الماركة </h4>
 
                                                 <!-- ------------------------------------- -->
 
                                                 <div class="row">
-
-                                                    {{-- 🔥 For Paid 🔥 --}}
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1">اسم القسم الفرعى</label>
+                                                            <label for="projectinput1">اسم الماركة </label>
                                                             <input type="text" value="{{old('name')}}" id="name" class="form-control" placeholder="" name="name">
                                                             @error("name")
                                                             <span class="text-danger">{{$message}}</span>
@@ -127,23 +97,9 @@
                                                         </div>
                                                     </div>
 
-                                                    {{-- 🔥 For Paid 🔥 --}}
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1">الاسم بالرابط</label>
-                                                            <input type="text" value="{{old('slug')}}" id="slug" class="form-control" placeholder="" name="slug">
-                                                            @error("slug")
-                                                            <span class="text-danger">{{$message}} </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
                                                 </div>
 
                                                 <!-- ------------------------------------- -->
-
-                                                {{-- 🔥 For Paid 🔥 --}}
 
                                                 <div class="row">
 
