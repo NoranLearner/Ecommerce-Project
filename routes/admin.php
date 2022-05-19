@@ -4,6 +4,7 @@ use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VendorsController;
@@ -180,6 +181,26 @@ Route::group([
         });
 
         // ***************** End Brands Routes ****************** //
+
+        // ***************** Begin Tags Routes ****************** //
+
+        Route::group(['prefix'=>'tags'], function(){
+
+            Route::get('/', [TagController::class, 'index'])->name('admin.tags');
+
+            Route::get('create', [TagController::class, 'create'])->name('admin.tags.create');
+
+            Route::post('store', [TagController::class, 'store'])->name('admin.tags.store');
+
+            Route::get('edit/{id}', [TagController::class, 'edit'])->name('admin.tags.edit');
+
+            Route::post('update/{id}', [TagController::class, 'update'])->name('admin.tags.update');
+
+            Route::get('delete/{id}', [TagController::class, 'destroy'])->name('admin.tags.delete');
+
+        });
+
+        // ***************** End Tags Routes ****************** //
 
         // ***************** Begin Settings Routes ****************** //
 

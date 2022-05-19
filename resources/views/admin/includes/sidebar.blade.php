@@ -136,6 +136,28 @@
 
             <li class="nav-item">
                 <a href="">
+                    <i class="la la-tag"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">العلامات</span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+
+                        {{ App\Models\Tag::count() }}
+
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.tags') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.tags.create') }}" data-i18n="nav.dash.crypto">اضافة علامة</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
+            <li class="nav-item">
+                <a href="">
                     <i class="la la-cog"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">{{ trans('admin/sidebar.settings') }}</span>
                     <span class="badge badge badge-info badge-pill float-right mr-2">
