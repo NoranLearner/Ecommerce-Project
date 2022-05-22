@@ -12,7 +12,7 @@ class Brand extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // For Datatables Package
+    // For laravel-translatable Package
 
     use Translatable;
 
@@ -28,7 +28,7 @@ class Brand extends Model
      * @var array
      */
 
-    // For Datatables , laravel-translatable Package
+    // For laravel-translatable Package
 
     protected $with = ['translations'];
 

@@ -171,7 +171,7 @@
 
                                                 {{-- 🔥 For Paid 🔥 --}}
 
-                                                <div class="row hidden" id="cats_list" >
+                                                {{-- <div class="row hidden" id="cats_list" >
                                                     <div class="col-md-12">
                                                         <div class="form-group">
 
@@ -193,7 +193,7 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <!-- ------------------------------------- -->
 

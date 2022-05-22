@@ -12,7 +12,7 @@ class Setting extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // For Datatables Package
+    // For laravel-translatable Package
 
     use Translatable;
 
@@ -29,11 +29,11 @@ class Setting extends Model
      * @var array
      */
 
-    // For Datatables , laravel-translatable Package
+    // For laravel-translatable Package
 
     protected $with = ['translations'];
 
-    // For Datatables , laravel-translatable Package
+    // For laravel-translatable Package
 
     protected $translatedAttributes = ['value'];
 

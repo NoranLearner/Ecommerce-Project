@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Config;
+use App\Http\Enumerations\CategoryType;
 use App\Http\Requests\MainCategoryRequest;
 // use App\Http\Enumerations\CategoryType;
 
@@ -41,6 +42,8 @@ class MainCategoriesController extends Controller
         // Use Scope scopeParent in Category Model
 
         $categories = Category::Parent() -> orderBy('id', 'DESC') -> paginate(PAGINATION_COUNT);
+
+        // $categories = Category::with('_parent') -> orderBy('id','DESC') -> paginate(PAGINATION_COUNT);
 
         return view('admin.mainCategories.mainCategories', compact('categories'));
     }
@@ -181,6 +184,11 @@ class MainCategoriesController extends Controller
                 $request->request->add(['is_active' => 1]);
 
             //if user choose main category then we must remove parent id from the request
+
+            /* if($request -> type == 1) //main category
+            {
+                $request-> except('parent_id');
+            } */
 
             /* if($request -> type == CategoryType::mainCategory) //main category
             {
