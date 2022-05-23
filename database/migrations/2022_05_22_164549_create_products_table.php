@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
 
             $table->string('slug')->unique();
 
-            $table->decimal('price', 18, 4)->unsigned();
+            $table->decimal('price', 18, 4)->unsigned()->default(0.0000);
 
             $table->decimal('special_price', 18, 4)->unsigned()->nullable();
 
@@ -33,11 +33,11 @@ class CreateProductsTable extends Migration
 
             $table->string('sku')->nullable();
 
-            $table->boolean('manage_stock');
+            $table->boolean('manage_stock')->default(0);
 
             $table->integer('qty')->nullable();
 
-            $table->boolean('in_stock');
+            $table->boolean('in_stock')->default(1);
 
             $table->integer('viewed')->unsigned()->default(0);
 

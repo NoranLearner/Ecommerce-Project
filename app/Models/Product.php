@@ -115,6 +115,11 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'product_categories');
     }
 
+    public function getActive()
+    {
+        return $this->is_active == 0 ? 'غير مفعل' : 'مفعل';
+    }
+
 
 
 

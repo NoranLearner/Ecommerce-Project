@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductGeneralRequest;
 
@@ -18,7 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::select('id','slug','price', 'created_at')->paginate(PAGINATION_COUNT);
+        return view('admin.products.general.products', compact('products'));
     }
 
     // ------------------------------------------------------------------------//
@@ -48,7 +51,61 @@ class ProductController extends Controller
      */
     public function store(ProductGeneralRequest $request)
     {
-        return $request;
+        // return $request;
+
+        try {
+
+            //validation
+
+            DB::beginTransaction();
+
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
+
+
+            $product = Product::create(
+                [
+
+                'slug' => $request->slug,
+
+                'brand_id' => $request->brand_id,
+
+                'is_active' => $request->is_active,
+
+                ]
+            );
+
+            //save translations
+
+            $product->name = $request->name;
+
+            $product->description = $request->description;
+
+            $product->short_description = $request->short_description;
+
+            $product->save();
+
+            //save product categories
+
+            $product->categories()->attach($request->categories);
+
+            //save product tags
+
+            DB::commit();
+
+            return redirect()->route('admin.products')->with(['success' => 'تم الحفظ بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            DB::rollback();
+
+            return redirect()->route('admin.products')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
     }
 
     // ------------------------------------------------------------------------//
