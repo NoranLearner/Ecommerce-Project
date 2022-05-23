@@ -70,7 +70,7 @@ class Product extends Model
      *
      * @var array
      */
-    // protected $hidden = ['translations'];
+    protected $hidden = ['translations'];
 
     /**
      * The attributes that should be cast to native types.
@@ -100,11 +100,6 @@ class Product extends Model
 
     // *******************  Relationship ******************* //
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'product_categories');
-    }
-
     public function brand()
     {
         return $this->belongsTo(Brand::class)->withDefault();
@@ -115,6 +110,10 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_categories');
+    }
 
 
 

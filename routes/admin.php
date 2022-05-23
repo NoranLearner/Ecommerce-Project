@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VendorsController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -201,6 +202,20 @@ Route::group([
         });
 
         // ***************** End Tags Routes ****************** //
+
+        // ***************** Begin Products Routes ****************** //
+
+        Route::group(['prefix'=>'products'], function(){
+
+            Route::get('/', [ProductController::class, 'index'])->name('admin.products');
+
+            Route::get('general-information', [ProductController::class, 'create'])->name('admin.products.general.create');
+
+            Route::post('store-general-information', [ProductController::class, 'store'])->name('admin.products.general.store');
+
+        });
+
+        // ***************** End Products Routes ****************** //
 
         // ***************** Begin Settings Routes ****************** //
 

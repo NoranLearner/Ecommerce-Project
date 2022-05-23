@@ -158,6 +158,28 @@
 
             <li class="nav-item">
                 <a href="">
+                    <i class="la la-cart-plus"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">المنتجات</span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+
+                        {{ App\Models\Product::count() }}
+
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.products') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.products.general.create') }}" data-i18n="nav.dash.crypto">اضافة منتج</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
+            <li class="nav-item">
+                <a href="">
                     <i class="la la-cog"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">{{ trans('admin/sidebar.settings') }}</span>
                     <span class="badge badge badge-info badge-pill float-right mr-2">
