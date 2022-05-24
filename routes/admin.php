@@ -213,6 +213,26 @@ Route::group([
 
             Route::post('store-general-information', [ProductController::class, 'store'])->name('admin.products.general.store');
 
+            // For price
+
+            Route::get('price/{id}', [ProductController::class, 'getPrice'])->name('admin.products.price.create');
+
+            Route::post('price', [ProductController::class, 'savePrice'])->name('admin.products.price.store');
+
+            // For Images
+
+            Route::get('images/{id}', [ProductController::class, 'addImages'])->name('admin.products.images.create');
+
+            Route::post('images', [ProductController::class, 'saveImages'])->name('admin.products.images.store');
+
+            Route::post('images/db', [ProductController::class, 'saveImagesDB'])->name('admin.products.images.store.db');
+
+            // For Stock
+
+            Route::get('stock/{id}', [ProductController::class, 'getStock'])->name('admin.products.stock.create');
+
+            Route::post('stock', [ProductController::class, 'saveStock'])->name('admin.products.stock.store');
+
         });
 
         // ***************** End Products Routes ****************** //
