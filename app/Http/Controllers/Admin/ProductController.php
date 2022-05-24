@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductPriceRequest;
+use App\Http\Requests\ProductStockRequest;
 use App\Http\Requests\ProductGeneralRequest;
 
 class ProductController extends Controller
@@ -211,7 +212,49 @@ class ProductController extends Controller
 
     // ------------------------------------------------------------------------//
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getStock($product_id)
+    {
+        return view('admin.products.stock.createStock') -> with('id',$product_id) ;
+    }
+
     // ------------------------------------------------------------------------//
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveStock(ProductStockRequest $request)
+    {
+        // return $request;
+
+        try {
+
+            //validation
+
+            Product::whereId($request -> product_id) -> update($request -> except([
+                '_token',
+                'product_id'
+                ]));
+
+            return redirect()->route('admin.products')->with(['success' => 'تم التحديث بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return $ex;
+
+            return redirect()->route('admin.products')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
+    }
 
     // ------------------------------------------------------------------------//
 
