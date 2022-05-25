@@ -13,7 +13,7 @@ class CreateProductImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_images', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
 
             $table->id();
 
@@ -22,7 +22,7 @@ class CreateProductImagesTable extends Migration
             $table->string('photo');
 
             $table->timestamps();
-            
+
         });
     }
 
@@ -33,6 +33,6 @@ class CreateProductImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('images');
     }
 }

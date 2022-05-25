@@ -258,6 +258,16 @@ class ProductController extends Controller
 
     // ------------------------------------------------------------------------//
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addImages($product_id)
+    {
+        return view('admin.products.images.createImages') -> with('id',$product_id) ;
+    }
+
     // ------------------------------------------------------------------------//
 
     // ------------------------------------------------------------------------//
