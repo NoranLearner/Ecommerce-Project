@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\VendorsController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AttributesController;
 use App\Http\Controllers\Admin\LoginAdminController;
 use App\Http\Controllers\Admin\SubCategoriesController;
 use App\Http\Controllers\Admin\MainCategoriesController;
@@ -236,6 +237,26 @@ Route::group([
         });
 
         // ***************** End Products Routes ****************** //
+
+        // ***************** Begin Attributes Routes ****************** //
+
+        Route::group(['prefix'=>'attributes'], function(){
+
+            Route::get('/', [AttributesController::class, 'index'])->name('admin.attributes');
+
+            Route::get('create', [AttributesController::class, 'create'])->name('admin.attributes.create');
+
+            Route::post('store', [AttributesController::class, 'store'])->name('admin.attributes.store');
+
+            Route::get('edit/{id}', [AttributesController::class, 'edit'])->name('admin.attributes.edit');
+
+            Route::post('update/{id}', [AttributesController::class, 'update'])->name('admin.attributes.update');
+
+            Route::get('delete/{id}', [AttributesController::class, 'destroy'])->name('admin.attributes.delete');
+
+        });
+
+        // ***************** End Attributes Routes ****************** //
 
         // ***************** Begin Settings Routes ****************** //
 
