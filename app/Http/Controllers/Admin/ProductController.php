@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductPriceRequest;
 use App\Http\Requests\ProductStockRequest;
+use App\Http\Requests\ProductImagesRequest;
 use App\Http\Requests\ProductGeneralRequest;
 
 class ProductController extends Controller
@@ -270,8 +271,37 @@ class ProductController extends Controller
 
     // ------------------------------------------------------------------------//
 
+    //to save images to folder only
+
+    public function saveImages(Request $request ){
+
+        $file = $request->file('dzfile');
+
+        // In Helper File - General
+        $filename = uploadImage('products', $file);
+        // $filename = $this -> uploadImage('events', $file);
+
+
+        return response()->json([
+            'name' => $filename,
+            'original_name' => $file->getClientOriginalName(),
+        ]);
+
+    }
+
     // ------------------------------------------------------------------------//
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveImagesDB(Request $request)
+    {
+        return $request;
+
+    }
 
     // ------------------------------------------------------------------------//
 
