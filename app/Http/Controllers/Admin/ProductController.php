@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Models\Brand;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -297,9 +298,36 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function saveImagesDB(Request $request)
+    public function saveImagesDB(ProductImagesRequest $request)
     {
-        return $request;
+        // return $request;
+
+        try {
+
+            //validation
+
+            // save dropzone images
+
+            if ($request->has('document') && count($request->document) > 0) {
+                foreach ($request->document as $image) {
+                    Image::create([
+                        'product_id' => $request->product_id,
+                        'photo' => $image,
+                    ]);
+                }
+            }
+
+            return redirect()->route('admin.products')->with(['success' => 'تم التحديث بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return $ex;
+
+            return redirect()->route('admin.products')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
 
     }
 

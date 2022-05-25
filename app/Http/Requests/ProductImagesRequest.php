@@ -13,7 +13,7 @@ class ProductImagesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class ProductImagesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'product_id' => 'required|exists:products,id',
+            'document' => 'required|array|min:1',
+            'document.*' => 'required|string',
         ];
     }
 }
