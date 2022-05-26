@@ -97,7 +97,12 @@ class AttributesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $attribute = Attribute::find($id);
+
+        if (!$attribute)
+            return redirect()->route('admin.attributes')->with(['error' => 'هذا العنصر  غير موجود ']);
+
+        return view('admin.attributes.editAttributes', compact('attribute'));
     }
 
     // ------------------------------------------------------//
@@ -109,9 +114,42 @@ class AttributesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AttributeRequest $request, $id)
     {
-        //
+        try {
+
+            //validation
+
+            $attribute = Attribute::find($id);
+
+            if (!$attribute)
+                return redirect()->route('admin.attributes')->with(['error' => 'هذا العنصر غير موجود']);
+
+            DB::beginTransaction();
+
+            //update DB
+
+            // $attribute ->update($request->except('_token', 'id'));
+
+            //save translations
+
+            $attribute->name = $request->name;
+
+            $attribute->save();
+
+            DB::commit();
+
+            return redirect()->route('admin.attributes')->with(['success' => 'تم ألتحديث بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            DB::rollback();
+
+            return redirect()->route('admin.attributes')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
     }
 
     // ------------------------------------------------------//
@@ -124,7 +162,24 @@ class AttributesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $attribute = Attribute::find($id);
+
+            if (!$attribute)
+                return redirect()->route('admin.attributes')->with(['error' => 'هذة الخاصية غير موجودة']);
+
+            $attribute->delete();
+
+            return redirect()->route('admin.attributes')->with(['success' => 'تم  الحذف بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return redirect()->route('admin.attributes')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
     }
 
     // ------------------------------------------------------//

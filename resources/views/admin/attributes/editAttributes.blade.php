@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    تعديل الماركة
+    تعديل الخاصية
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">الماركات التجارية</h3>
+                    <h3 class="content-header-title">خصائص المنتج</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
@@ -18,9 +18,9 @@
                                     <a href="{{route('admin.dashboard')}}"> الرئيسية </a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{route('admin.brands')}}">الماركات التجارية</a>
+                                    <a href="{{route('admin.attributes')}}">خصائص المنتج</a>
                                 </li>
-                                <li class="breadcrumb-item active"> تعديل الماركة
+                                <li class="breadcrumb-item active"> تعديل الخاصية
                                 </li>
                             </ol>
                         </div>
@@ -40,7 +40,7 @@
                             <div class="card">
 
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form">تعديل الماركة</h4>
+                                    <h4 class="card-title" id="basic-layout-form">تعديل الخاصية</h4>
                                     <a class="heading-elements-toggle">
                                         <i class="la la-ellipsis-v font-medium-3"></i>
                                     </a>
@@ -62,38 +62,19 @@
 
                                         <!-- ********************************************************************** -->
 
-                                        <form class="form" action="{{route('admin.brands.update',$brand -> id)}}" method="POST" enctype="multipart/form-data">
+                                        <form class="form" action="{{route('admin.attributes.update',$attribute -> id)}}" method="POST" enctype="multipart/form-data">
 
                                             @csrf
 
                                             <!-- No Validate For photo in edit form -->
 
-                                            <input name="id" value="{{$brand -> id}}" type="hidden">
-
-                                            <!-- ------------------------------------- -->
-
-                                            <div class="form-group">
-                                                <div class="text-center">
-                                                    <img src="{{$brand  -> photo}}" class="rounded-circle  height-150" alt="صورة القسم">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label> صوره الماركة </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="photo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                                                @error('photo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
+                                            <input name="id" value="{{$attribute -> id}}" type="hidden">
 
                                             <!-- ------------------------------------- -->
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"> <i class="ft-home"></i> بيانات  الماركة التجارية </h4>
+                                                <h4 class="form-section"> <i class="ft-home"></i> بيانات الخاصية </h4>
 
                                                 <!-- ------------------------------------- -->
 
@@ -101,31 +82,11 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1">اسم الماركة </label>
-                                                            <input type="text" value="{{$brand -> name}}" id="name" class="form-control" placeholder="" name="name">
+                                                            <label for="projectinput1">اسم الخاصية </label>
+                                                            <input type="text" value="{{$attribute -> name}}" id="name" class="form-control" placeholder="" name="name">
                                                             @error("name")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <!-- ------------------------------------- -->
-
-                                                <div class="row">
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-
-                                                            <label for="switcheryColor4" class="card-title ml-1">الحالة</label>
-
-                                                            <input type="checkbox" value="1" name="is_active" id="switcheryColor4" class="switchery" data-color="success" @if($brand -> is_active == 1)checked @endif/>
-
-                                                            @error("is_active")
-                                                                <span class="text-danger">{{$message }}</span>
-                                                            @enderror
-
                                                         </div>
                                                     </div>
 
