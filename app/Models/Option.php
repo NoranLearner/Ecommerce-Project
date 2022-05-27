@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Option;
+use App\Models\Product;
+use App\Models\Attribute;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Attribute extends Model
+class Option extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,7 +18,7 @@ class Attribute extends Model
 
     use Translatable;
 
-    protected $table = 'attributes';
+    protected $table = 'options';
 
     public $timestamps = true;
 
@@ -40,16 +41,27 @@ class Attribute extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
+    protected $fillable = ['attribute_id', 'product_id','price'];
 
-    // protected $fillable = [];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = ['translations'];
 
     // *******************  Scope ******************* //
 
     // *******************  Relationship ******************* //
 
-    public  function options(){
-        return $this->hasMany(Option::class,'attribute_id');
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function attribute(){
+        return $this -> belongsTo(Attribute::class,'attribute_id');
     }
 }

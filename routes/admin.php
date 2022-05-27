@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OptionsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VendorsController;
@@ -257,6 +258,28 @@ Route::group([
         });
 
         // ***************** End Attributes Routes ****************** //
+
+        // ***************** End Products Routes ****************** //
+
+        // ***************** Begin Options Routes ****************** //
+
+        Route::group(['prefix'=>'options'], function(){
+
+            Route::get('/', [OptionsController::class, 'index'])->name('admin.options');
+
+            Route::get('create', [OptionsController::class, 'create'])->name('admin.options.create');
+
+            Route::post('store', [OptionsController::class, 'store'])->name('admin.options.store');
+
+            Route::get('edit/{id}', [OptionsController::class, 'edit'])->name('admin.options.edit');
+
+            Route::post('update/{id}', [OptionsController::class, 'update'])->name('admin.options.update');
+
+            Route::get('delete/{id}', [OptionsController::class, 'destroy'])->name('admin.options.delete');
+
+        });
+
+        // ***************** End Options Routes ****************** //
 
         // ***************** Begin Settings Routes ****************** //
 

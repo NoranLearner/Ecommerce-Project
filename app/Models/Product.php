@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Tag;
 use App\Models\Brand;
+use App\Models\Option;
 use App\Models\Category;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
@@ -98,6 +99,11 @@ class Product extends Model
 
     // *******************  Scope ******************* //
 
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
     // *******************  Relationship ******************* //
 
     public function brand()
@@ -120,6 +126,10 @@ class Product extends Model
         return $this->is_active == 0 ? 'غير مفعل' : 'مفعل';
     }
 
+    public function options()
+    {
+        return $this->hasMany(Option::class, 'product_id');
+    }
 
 
 
