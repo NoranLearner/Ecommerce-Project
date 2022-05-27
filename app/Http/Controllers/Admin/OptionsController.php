@@ -112,7 +112,16 @@ class OptionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [];
+        $data['option'] = Option::find($id);
+
+        if (!$data['option'])
+            return redirect()->route('admin.options')->with(['error' => 'هذه القيمة غير موجوده ']);
+
+        $data['products'] = Product::active()->select('id')->get();
+        $data['attributes'] = Attribute::select('id')->get();
+
+        return view('admin.options.editOptions', $data);
     }
 
     // ------------------------------------------------------//
@@ -124,9 +133,44 @@ class OptionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OptionRequest $request, $id)
     {
-        //
+        try {
+
+            //validation
+
+            $option = Option::find($id);
+
+            if (!$option)
+                return redirect()->route('admin.options')->with(['error' => 'هذا العنصر غير موجود']);
+
+            DB::beginTransaction();
+
+            //update DB
+
+            $option->update($request->only(['price','product_id','attribute_id']));
+
+            // $attribute ->update($request->except('_token', 'id'));
+
+            //save translations
+
+            $option->name = $request->name;
+
+            $option->save();
+
+            DB::commit();
+
+            return redirect()->route('admin.options')->with(['success' => 'تم ألتحديث بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            DB::rollback();
+
+            return redirect()->route('admin.options')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
     }
 
     // ------------------------------------------------------//
@@ -139,7 +183,24 @@ class OptionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $option = Option::find($id);
+
+            if (!$option)
+                return redirect()->route('admin.options')->with(['error' => 'هذة الخاصية غير موجودة']);
+
+            $option->delete();
+
+            return redirect()->route('admin.options')->with(['success' => 'تم  الحذف بنجاح']);
+
+        }
+
+        catch (\Exception $ex) {
+
+            return redirect()->route('admin.options')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+
+        }
     }
 
     // ------------------------------------------------------//
