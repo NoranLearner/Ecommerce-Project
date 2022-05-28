@@ -6,8 +6,7 @@
 
             <div id="_desktop_logo" class="contentsticky_logo d-flex align-items-center justify-content-start col-lg-3 col-md-3">
                 <a href="{{route('home')}}">
-                    <img class="logo img-fluid"
-                    src="http://demo.bestprestashoptheme.com/savemart/modules/novthemeconfig/images/logos/logo-1.png" alt="Prestashop_Savemart">
+                    <img class="logo img-fluid" src="http://demo.bestprestashoptheme.com/savemart/modules/novthemeconfig/images/logos/logo-1.png" alt="Prestashop_Savemart">
                 </a>
             </div>
 
