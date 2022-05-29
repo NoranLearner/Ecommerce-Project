@@ -18,8 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/front/img/favicon.ico')}}?1531456858">
     <link href="{{asset('assets/front/css/css.css')}}?family=Roboto:300,400,500,600,700,900" rel="stylesheet">
     <link href="{{asset('assets/front/css/css-1.css')}}?family=Oswald:300,400,500,600,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/front/themes/vinova_savemart/assets/cache/theme-78026624.css')}}"
-          type="text/css" media="all">
+    <link rel="stylesheet" href="{{asset('assets/front/themes/vinova_savemart/assets/cache/theme-78026624.css')}}" type="text/css" media="all">
 
 
     <script type="text/javascript">
@@ -111,8 +110,9 @@
     @include('front.includes.footer')
     <div class="canvas-overlay"></div>
     <div id="back-top">
-  <span>
-    <i class="fa fa-long-arrow-up"></i>  </span>
+    <span>
+        <i class="fa fa-long-arrow-up"></i>
+    </span>
     </div>
 </main>
 
@@ -182,12 +182,10 @@
         <div id="box-currency" class="box-content d-flex">
             <div class="w-100">
                 <div class="item-currency current">
-                    <a title="British Pound" rel="nofollow"
-                       href="index-1.htm?home=home_3&amp;SubmitCurrency=1&amp;id_currency=1">British Pound: GBP</a>
+                    <a title="British Pound" rel="nofollow" href="index-1.htm?home=home_3&amp;SubmitCurrency=1&amp;id_currency=1">British Pound: GBP</a>
                 </div>
                 <div class="item-currency">
-                    <a title="US Dollar" rel="nofollow"
-                       href="index-2.htm?home=home_3&amp;SubmitCurrency=1&amp;id_currency=2">US Dollar: USD</a>
+                    <a title="US Dollar" rel="nofollow" href="index-2.htm?home=home_3&amp;SubmitCurrency=1&amp;id_currency=2">US Dollar: USD</a>
                 </div>
             </div>
         </div>
@@ -195,36 +193,40 @@
         <div id="box-language" class="box-content d-flex">
             <div class="w-100">
                 <div class="item-language current">
-                    <a href="index.htm?home=home_3" class="d-flex align-items-center"><img class="img-fluid mr-2"
-                                                                                           src="../img/l/1.jpg"
-                                                                                           alt="English (English)"
-                                                                                           width="16" height="11"><span>English</span></a>
+                    <a href="index.htm?home=home_3" class="d-flex align-items-center">
+                        <img class="img-fluid mr-2" src="../img/l/1.jpg" alt="English (English)" width="16" height="11">
+                        <span>English</span>
+                    </a>
                 </div>
                 <div class="item-language">
-                    <a href="http://demo.bestprestashoptheme.com/savemart/fr/?home=home_3"
-                       class="d-flex align-items-center"><img class="img-fluid mr-2" src="../img/l/2.jpg"
-                                                              alt="Français (French)" width="16" height="11"><span>Français</span></a>
+                    <a href="http://demo.bestprestashoptheme.com/savemart/fr/?home=home_3" class="d-flex align-items-center">
+                        <img class="img-fluid mr-2" src="../img/l/2.jpg" alt="Français (French)" width="16" height="11">
+                        <span>Français</span>
+                    </a>
                 </div>
                 <div class="item-language">
-                    <a href="http://demo.bestprestashoptheme.com/savemart/es/?home=home_3"
-                       class="d-flex align-items-center"><img class="img-fluid mr-2" src="../img/l/3.jpg"
-                                                              alt="Español (Spanish)" width="16" height="11"><span>Español</span></a>
+                    <a href="http://demo.bestprestashoptheme.com/savemart/es/?home=home_3" class="d-flex align-items-center">
+                        <img class="img-fluid mr-2" src="../img/l/3.jpg" alt="Español (Spanish)" width="16" height="11">
+                        <span>Español</span>
+                    </a>
                 </div>
                 <div class="item-language">
-                    <a href="http://demo.bestprestashoptheme.com/savemart/it/?home=home_3"
-                       class="d-flex align-items-center"><img class="img-fluid mr-2" src="../img/l/4.jpg"
-                                                              alt="Italiano (Italian)" width="16" height="11"><span>Italiano</span></a>
+                    <a href="http://demo.bestprestashoptheme.com/savemart/it/?home=home_3" class="d-flex align-items-center">
+                        <img class="img-fluid mr-2" src="../img/l/4.jpg" alt="Italiano (Italian)" width="16" height="11">
+                        <span>Italiano</span>
+                    </a>
                 </div>
                 <div class="item-language">
-                    <a href="http://demo.bestprestashoptheme.com/savemart/pl/?home=home_3"
-                       class="d-flex align-items-center"><img class="img-fluid mr-2" src="../img/l/5.jpg"
-                                                              alt="Polski (Polish)" width="16"
-                                                              height="11"><span>Polski</span></a>
+                    <a href="http://demo.bestprestashoptheme.com/savemart/pl/?home=home_3" class="d-flex align-items-center">
+                        <img class="img-fluid mr-2" src="../img/l/5.jpg" alt="Polski (Polish)" width="16" height="11">
+                        <span>Polski</span>
+                    </a>
                 </div>
                 <div class="item-language">
-                    <a href="http://demo.bestprestashoptheme.com/savemart/ar/?home=home_3"
-                       class="d-flex align-items-center"><img class="img-fluid mr-2" src="../img/l/6.jpg"
-                                                              alt="اللغة العربية (Arabic)" width="16" height="11"><span>اللغة العربية</span></a>
+                    <a href="http://demo.bestprestashoptheme.com/savemart/ar/?home=home_3" class="d-flex align-items-center">
+                        <img class="img-fluid mr-2" src="../img/l/6.jpg" alt="اللغة العربية (Arabic)" width="16" height="11">
+                        <span>اللغة العربية</span>
+                    </a>
                 </div>
             </div>
         </div>
