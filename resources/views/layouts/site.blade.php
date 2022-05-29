@@ -9,7 +9,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
-    <title>Prestashop_Savemart</title>
+    {{-- <title>Prestashop_Savemart</title> --}}
+    <title>Ecommerce Project</title>
+
     <meta name="description" content="Shop powered by PrestaShop">
     <meta name="keywords" content="">
     <meta name="csrf-token" content="{{csrf_token()}}">
