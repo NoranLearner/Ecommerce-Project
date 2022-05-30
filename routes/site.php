@@ -18,7 +18,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Auth::routes();
 
-Route::get('/', function () { return view('front.home'); });
+Route::get('/', function () { return view('front.home'); })->name('home');
 
 // =================================================================================== //
 
