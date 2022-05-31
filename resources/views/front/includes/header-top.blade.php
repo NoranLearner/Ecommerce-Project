@@ -31,7 +31,7 @@
 
                         <i class="zmdi zmdi-account"></i>
 
-                        @guest()
+                        @guest('web')
 
                             <a class="register" href="{{route('register')}}" data-link-action="display-register-form">
                                 Register
@@ -43,7 +43,7 @@
 
                         @endguest
 
-                        @auth()
+                        @auth('web')
 
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout

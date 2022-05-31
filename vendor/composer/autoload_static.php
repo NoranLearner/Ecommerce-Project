@@ -634,6 +634,7 @@ class ComposerStaticInit4d9cec9033d7d732aaa113238db22499
         'App\\Models\\Tag' => __DIR__ . '/../..' . '/app/Models/Tag.php',
         'App\\Models\\TagTranslation' => __DIR__ . '/../..' . '/app/Models/TagTranslation.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\UserVerificationCode' => __DIR__ . '/../..' . '/app/Models/UserVerificationCode.php',
         'App\\Models\\Vendor' => __DIR__ . '/../..' . '/app/Models/Vendor.php',
         'App\\Notifications\\VendorCreated' => __DIR__ . '/../..' . '/app/Notifications/VendorCreated.php',
         'App\\Observers\\MainCategoryObserver' => __DIR__ . '/../..' . '/app/Observers/MainCategoryObserver.php',

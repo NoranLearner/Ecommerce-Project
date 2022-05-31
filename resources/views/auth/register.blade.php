@@ -53,8 +53,7 @@
                                 <section>
 
                                     <div class="form-group row no-gutters">
-                                        {{-- required --}}
-                                        <label class="col-md-2 form-control-label mb-xs-5"> Name : </label>
+                                        <label class="col-md-2 form-control-label mb-xs-5 required"> Name : </label>
                                         <div class="col-md-6">
                                             {{--  required="" --}}
                                             <input class="form-control" name="name" value="{{ old('name') }}" type="text">
@@ -68,8 +67,7 @@
                                     </div>
 
                                     <div class="form-group row no-gutters">
-                                        {{-- required --}}
-                                        <label class="col-md-2 form-control-label mb-xs-5"> Mobile : </label>
+                                        <label class="col-md-2 form-control-label mb-xs-5 required"> Mobile : </label>
                                         <div class="col-md-6">
                                             {{--  required="" --}}
                                             <input class="form-control" name="mobile" value="{{ old('mobile') }}" type="text">
@@ -83,8 +81,7 @@
                                     </div>
 
                                     <div class="form-group row no-gutters">
-                                        {{-- required --}}
-                                        <label class="col-md-2 form-control-label mb-xs-5"> Password : </label>
+                                        <label class="col-md-2 form-control-label mb-xs-5 required"> Password : </label>
                                         <div class="col-md-6">
                                             <div class="input-group js-parent-focus">
                                                 {{--  required="" --}}
@@ -103,8 +100,7 @@
                                     </div>
 
                                     <div class="form-group row no-gutters">
-                                        {{-- required --}}
-                                        <label class="col-md-2 form-control-label mb-xs-5"> confirm Password : </label>
+                                        <label class="col-md-2 form-control-label mb-xs-5 required"> confirm Password : </label>
                                         <div class="col-md-6">
                                             <div class="input-group js-parent-focus">
                                                 {{--  required="" --}}

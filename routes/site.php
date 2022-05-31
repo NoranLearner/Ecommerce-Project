@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Site\VerificationCodeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -18,8 +19,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Auth::routes();
 
-Route::get('/', function () { return view('front.home'); })->name('home');
-
 // =================================================================================== //
 
 // For Mcamara Package
@@ -33,26 +32,50 @@ Route::group([
 
     // =================================================================================== //
 
-    // Must be Authenticated User
+    Route::get( '/', function () { return view('front.home'); } ) -> name('home') -> middleware('VerifiedUser') ;
+
+    // =================================================================================== //
+
+    // Must be Authenticated User and Verified
+
 
     // 'auth:web' From 'config/auth.php'
 
-    Route::group(['namespace'=>'Site', 'middleware' => 'auth:web'], function() {
+    Route::group(['namespace'=>'Site', 'middleware' => 'auth:web', 'VerifiedUser'], function() {
 
         // ***************** Begin Routes ****************** //
+
+        Route::get('profile', function(){
+            return 'You are Authenticated';
+        });
+
         // ***************** End Routes ****************** //
 
     });
 
     // =================================================================================== //
 
+    // Must be Authenticated User
+
+
+    Route::group(['namespace'=>'Site', 'middleware' => 'auth:web'], function() {
+
+        // ***************** Begin Verify Routes ****************** //
+
+        Route::post('verify-user', [VerificationCodeController::class, 'verify'])->name('verify-user');
+
+        Route::post('verify', [VerificationCodeController::class, 'getVerifyPage'])->name('get.verification.form');
+
+        // ***************** End Verify Routes ****************** //
+
+    });
+
+    // =================================================================================== //
+
+    // For All Users
+
+
     Route::group(['namespace'=>'Site', 'middleware' => 'guest:web'], function() {
-
-        // For User Login
-
-        // Route::get('login', [LoginController::class, 'getLogin'])->name('getLogin');
-
-        // Route::post('login', [LoginController::class, 'postLogin'])->name('postLogin');
 
     });
 
@@ -63,3 +86,4 @@ Route::group([
 // ***************** End Mcamara Package ****************** //
 
 // =================================================================================== //
+

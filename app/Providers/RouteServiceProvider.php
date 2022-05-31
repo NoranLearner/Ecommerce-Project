@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/';
     public const ADMIN = '/admin';
+    public const VERIFIED = '/verify';
 
     /**
      * The controller namespace for the application.
@@ -58,6 +59,10 @@ class RouteServiceProvider extends ServiceProvider
                 // ->prefix('admin')  // Cause Problem in Mcamara
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
+
+            // For Verify User
+            
+
         });
     }
 

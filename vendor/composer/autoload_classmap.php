@@ -77,6 +77,7 @@ return array(
     'App\\Models\\Tag' => $baseDir . '/app/Models/Tag.php',
     'App\\Models\\TagTranslation' => $baseDir . '/app/Models/TagTranslation.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\UserVerificationCode' => $baseDir . '/app/Models/UserVerificationCode.php',
     'App\\Models\\Vendor' => $baseDir . '/app/Models/Vendor.php',
     'App\\Notifications\\VendorCreated' => $baseDir . '/app/Notifications/VendorCreated.php',
     'App\\Observers\\MainCategoryObserver' => $baseDir . '/app/Observers/MainCategoryObserver.php',

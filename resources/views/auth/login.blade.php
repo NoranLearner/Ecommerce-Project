@@ -53,9 +53,8 @@
                                 <section>
 
                                     <div class="form-group row no-gutters">
-
-                                        {{-- required --}}
-                                        <label class="col-md-2 form-control-label mb-xs-5"> Mobile : </label>
+                                        
+                                        <label class="col-md-2 form-control-label mb-xs-5 required"> Mobile : </label>
 
                                         <div class="col-md-6">
                                             {{--  required="" --}}
@@ -73,8 +72,7 @@
 
                                     <div class="form-group row no-gutters">
 
-                                        {{-- required --}}
-                                        <label class="col-md-2 form-control-label mb-xs-5"> Password : </label>
+                                        <label class="col-md-2 form-control-label mb-xs-5 required"> Password : </label>
 
                                         <div class="col-md-6">
                                             <div class="input-group js-parent-focus">
