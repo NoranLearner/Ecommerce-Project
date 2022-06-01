@@ -4,7 +4,7 @@
     <div id="displayTop" class="displaytopthree">
         <div class="container">
             <div class="row">
-                <div class="nov-row  col-lg-12 col-xs-12">
+                <div class="nov-row col-lg-12 col-xs-12">
                     <div class="nov-row-wrap row">
                         <div class="nov-html col-xl-3 col-lg-3 col-md-3">
                             <div class="block">
@@ -36,8 +36,7 @@
                                 @isset($sliders)
                                     @foreach($sliders as $slider)
                                         <a href="#">
-                                            <img src="{{$slider -> photo }}"
-                                                 alt="" title="#htmlcaption_42">
+                                            <img src="{{$slider -> photo }}" alt="" title="#htmlcaption_42">
                                         </a>
                                     @endforeach
                                 @endisset
@@ -51,7 +50,8 @@
             </div>
         </div>
     </div>
-    @stop
+@stop
+
 @section('content')
 
     <div id="main">

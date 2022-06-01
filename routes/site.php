@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\VerificationCodeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -32,7 +32,14 @@ Route::group([
 
     // =================================================================================== //
 
-    Route::get( '/', function () { return view('front.home'); } ) -> name('home') -> middleware('VerifiedUser') ;
+    // For All Users
+
+
+    Route::group(['namespace'=>'Site', 'middleware' => 'guest:web'], function() {
+
+    });
+
+    Route::get( '/', [HomeController::class, 'home']) -> name('home') -> middleware('VerifiedUser') ;
 
     // =================================================================================== //
 
@@ -67,15 +74,6 @@ Route::group([
         Route::post('verify', [VerificationCodeController::class, 'getVerifyPage'])->name('get.verification.form');
 
         // ***************** End Verify Routes ****************** //
-
-    });
-
-    // =================================================================================== //
-
-    // For All Users
-
-
-    Route::group(['namespace'=>'Site', 'middleware' => 'guest:web'], function() {
 
     });
 

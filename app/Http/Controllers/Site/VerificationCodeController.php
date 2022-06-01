@@ -33,7 +33,7 @@ class VerificationCodeController extends Controller
         }
     }
 
-    // ********************************* //
+    // ------------------------------------------------------//
 
     public function getVerifyPage()
     {

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AttributesController;
 use App\Http\Controllers\Admin\LoginAdminController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoriesController;
 use App\Http\Controllers\Admin\MainCategoriesController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -280,6 +281,20 @@ Route::group([
         });
 
         // ***************** End Options Routes ****************** //
+
+        // ***************** Begin Sliders Routes ****************** //
+
+        Route::group(['prefix'=>'sliders'], function(){
+
+            Route::get('/', [SliderController::class, 'addImages'])->name('admin.sliders.create');
+
+            Route::post('images', [SliderController::class, 'saveSliderImages'])->name('admin.sliders.store');
+
+            Route::post('images/db', [SliderController::class, 'saveSliderImagesDB'])->name('admin.sliders.store.db');
+
+        });
+
+        // ***************** End Sliders Routes ****************** //
 
         // ***************** Begin Settings Routes ****************** //
 
