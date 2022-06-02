@@ -228,7 +228,7 @@
                     <i class="la la-image"></i>
                     <span class="menu-title" data-i18n="nav.dash.main"> السليدر </span>
                     <span class="badge badge badge-info badge-pill float-right mr-2">
-
+                        {{ App\Models\Slider::count() }}
                     </span>
                 </a>
                 <ul class="menu-content">

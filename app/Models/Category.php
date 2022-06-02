@@ -95,9 +95,14 @@ class Category extends Model
     }
 
     //get all childrens=
-    
+
     public function childrens(){
-        return $this -> hasMany(Self::class,'parent_id');
+        return $this -> hasMany(self::class,'parent_id');
+    }
+
+    public function products()
+    {
+        return $this -> belongsToMany(Product::class,'product_categories');
     }
 
 }
