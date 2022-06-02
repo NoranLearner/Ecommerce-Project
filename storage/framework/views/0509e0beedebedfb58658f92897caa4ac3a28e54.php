@@ -34,8 +34,7 @@
 
                                             <li class="item  parent">
 
-                                                
-                                                <a href="" title="Laptops &amp; Accessories">
+                                                <a href="<?php echo e(route('category',$category -> slug )); ?>" title="Laptops &amp; Accessories">
                                                     <i class="hasicon nov-icon" style="background:url('http://demo.bestprestashoptheme.com/savemart/themes/vinova_savemart/assets/img/modules/novverticalmenu/icon/laptop.png') no-repeat scroll center center;"> </i>
                                                     <?php echo e($category -> name); ?>
 
@@ -53,8 +52,7 @@
 
                                                                 <li class="item  parent">
 
-                                                                    
-                                                                    <a href="" title="Laptop Thinkpad"><?php echo e($childern -> name); ?></a>
+                                                                    <a href="<?php echo e(route('category',$childern -> slug )); ?>" title="Laptop Thinkpad"><?php echo e($childern -> name); ?></a>
 
                                                                     <?php if(isset($childern -> childrens )): ?>
 
@@ -64,8 +62,7 @@
                                                                             <ul>
                                                                                 <?php $__currentLoopData = $childern -> childrens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_childern): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                     <li class="item ">
-                                                                                        
-                                                                                        <a href="" title="Aliquam lobortis">
+                                                                                        <a href="<?php echo e(route('category',$_childern -> slug )); ?>" title="Aliquam lobortis">
                                                                                             <?php echo e($_childern -> name); ?>
 
                                                                                         </a>
