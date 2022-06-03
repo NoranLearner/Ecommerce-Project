@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\ProductController;
 use App\Http\Controllers\Site\CategoryController;
 use App\Http\Controllers\Site\VerificationCodeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -42,6 +43,8 @@ Route::group([
         Route::get( '/', [HomeController::class, 'home']) -> name('home') -> middleware('VerifiedUser') ;
 
         Route::get( 'category/{slug}', [CategoryController::class, 'productsBySlug']) -> name('category') ;
+
+        Route::get( 'product/{slug}', [ProductController::class, 'productsBySlug']) -> name('product.details') ;
 
     });
 

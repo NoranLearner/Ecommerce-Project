@@ -132,8 +132,7 @@
 
                                                     <div class="thumbnail-container">
 
-                                                        {{-- {{route('product.details',$product -> slug)}} --}}
-                                                        <a href="" class="thumbnail product-thumbnail two-image">
+                                                        <a href="{{route('product.details',$product -> slug)}}" class="thumbnail product-thumbnail two-image">
 
                                                             <img class="img-fluid image-cover"
                                                                 src="{{$product -> images[0] -> photo ?? ''}}"
@@ -186,8 +185,7 @@
                                                             </div>
 
                                                             <div class="product-title" itemprop="name">
-                                                                {{-- {{route('product.details',$product -> slug)}} --}}
-                                                                <a href=""> {{$product -> name}} </a>
+                                                                <a href="{{route('product.details',$product -> slug)}}"> {{$product -> name}} </a>
                                                             </div>
 
                                                             <div class="product-group-price">
@@ -241,7 +239,7 @@
 
                                             </div>
 
-                                            {{-- @include('front.includes.product-details',$product) --}}
+                                            @include('front.includes.product-details',$product)
 
                                         @endforeach
 
