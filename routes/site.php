@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\ProductController;
 use App\Http\Controllers\Site\CategoryController;
+use App\Http\Controllers\Site\WishlistController;
 use App\Http\Controllers\Site\VerificationCodeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -81,6 +82,16 @@ Route::group([
         Route::post('verify', [VerificationCodeController::class, 'getVerifyPage'])->name('get.verification.form');
 
         // ***************** End Verify Routes ****************** //
+
+        // ***************** Begin Wishlist Routes ****************** //
+
+        Route::post('wishlist', [WishlistController::class, 'store'])->name('wishlist.store');
+
+        Route::delete('wishlist', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+
+        Route::get('wishlist/products', [WishlistController::class, 'index'])->name('wishlist.products.index');
+
+        // ***************** End Wishlist Routes ****************** //
 
     });
 

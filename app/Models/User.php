@@ -52,4 +52,14 @@ class User extends Authenticatable
     public function codes() {
         return $this -> hasMany(UserVerificationCode::class,'user_id');
     }
+
+    public function wishlist()
+    {
+        return $this->belongsToMany(Product::class, 'wishlists')->withTimestamps();
+    }
+
+    public function wishlistHas($productId)
+    {
+        return self::wishlist()->where('product_id', $productId)->exists();
+    }
 }

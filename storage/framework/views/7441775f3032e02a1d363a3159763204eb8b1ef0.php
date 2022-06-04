@@ -38,8 +38,7 @@
                     </div>
 
                     <div class="header_link_wishlist">
-                        
-                        <a href="" title="My Wishlists">
+                        <a href="<?php echo e(route('wishlist.products.index')); ?>" title="My Wishlists">
                             <i class="header-icon-wishlist"></i>
                         </a>
                     </div>
@@ -51,8 +50,7 @@
                             <div class="header-cart">
 
                                 <div class="cart-left">
-                                    
-                                    <a href="" title="My Wishlists">
+                                    <a href="<?php echo e(route('wishlist.products.index')); ?>" title="My Wishlists">
                                         <div class="shopping-cart">
                                             <i class="zmdi zmdi-shopping-cart"></i>
                                         </div>
