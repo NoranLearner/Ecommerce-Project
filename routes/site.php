@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\PaymentController;
 use App\Http\Controllers\Site\ProductController;
 use App\Http\Controllers\Site\CategoryController;
 use App\Http\Controllers\Site\WishlistController;
@@ -46,6 +48,22 @@ Route::group([
         Route::get( 'category/{slug}', [CategoryController::class, 'productsBySlug']) -> name('category') ;
 
         Route::get( 'product/{slug}', [ProductController::class, 'productsBySlug']) -> name('product.details') ;
+
+        // ***************** Begin Cart routes ****************** //
+
+        Route::group(['prefix'=>'cart'], function(){
+
+            Route::get('/', [CartController::class, 'getIndex'])->name('site.cart.index');
+
+            Route::post('/cart/add/{slug?}', [CartController::class, 'postAdd'])->name('site.cart.add');
+
+            Route::post('/update/{slug}', [CartController::class, 'postUpdate'])->name('site.cart.update');
+
+            Route::post('/update-all', [CartController::class, 'postUpdateAll'])->name('site.cart.update-all');
+
+        });
+
+        // ***************** End Cart routes ****************** //
 
     });
 
@@ -92,6 +110,14 @@ Route::group([
         Route::get('wishlist/products', [WishlistController::class, 'index'])->name('wishlist.products.index');
 
         // ***************** End Wishlist Routes ****************** //
+
+        // ***************** Begin Payment routes ****************** //
+
+        Route::get('payment/{amount}', [PaymentController::class, 'getPayments'])->name('payment');
+
+        Route::post('payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+
+        // ***************** End Payment routes ****************** //
 
     });
 

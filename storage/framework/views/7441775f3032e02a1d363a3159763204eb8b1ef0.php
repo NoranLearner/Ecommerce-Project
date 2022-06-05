@@ -50,7 +50,7 @@
                             <div class="header-cart">
 
                                 <div class="cart-left">
-                                    <a href="<?php echo e(route('wishlist.products.index')); ?>" title="My Wishlists">
+                                    <a href="<?php echo e(route('site.cart.index')); ?>" title="My Wishlists">
                                         <div class="shopping-cart">
                                             <i class="zmdi zmdi-shopping-cart"></i>
                                         </div>

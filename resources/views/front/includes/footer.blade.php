@@ -184,7 +184,8 @@
                                 <div class="block_content">
 
                                     <p class="logo-footer">
-                                        <img src="img/logo-footer.png" alt="logo" width="167" height="23">
+                                        {{-- public/assets/front/modules/novthemeconfig/images/logos/logo-1.png --}}
+                                        <img src="assets/front/modules/novthemeconfig/images/logos/logo-1.png" alt="logo" width="167" height="23">
                                     </p>
 
                                     <div class="data-contact d-flex align-self-stretch">
@@ -304,11 +305,11 @@
 
                 <div class="col-md-6 align-items-center justify-content-md-start justify-content-sm-center d-flex pb-xs-max-20 flex-center">
 
-                    <span> Copyright © 2018 Vinovathemes. All Rights Reserved </span>
+                    <span> Copyright © 2022. All Rights Reserved </span>
                 </div>
 
                 <div class="payment-image col-md-6 align-items-center justify-content-md-end justify-content-sm-center d-flex flex-center">
-                    <img class="img-fluid" src="img/payment-logo-1.png" alt="payment" title="Payment">
+                    <img class="img-fluid" src="assets/front/modules/novthemeconfig/images/payment-logo-1.png" alt="payment" title="Payment">
                 </div>
 
             </div>
