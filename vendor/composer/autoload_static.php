@@ -565,6 +565,7 @@ class ComposerStaticInit4d9cec9033d7d732aaa113238db22499
     public static $classMap = array (
         'App\\Basket\\Basket' => __DIR__ . '/../..' . '/app/Basket/Basket.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\NewOrder' => __DIR__ . '/../..' . '/app/Events/NewOrder.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exceptions\\QuantityExceededException' => __DIR__ . '/../..' . '/app/Exceptions/QuantityExceededException.php',
         'App\\Http\\Controllers\\Admin\\AttributesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AttributesController.php',
@@ -576,6 +577,7 @@ class ComposerStaticInit4d9cec9033d7d732aaa113238db22499
         'App\\Http\\Controllers\\Admin\\OptionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OptionsController.php',
         'App\\Http\\Controllers\\Admin\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProductController.php',
         'App\\Http\\Controllers\\Admin\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfileController.php',
+        'App\\Http\\Controllers\\Admin\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RolesController.php',
         'App\\Http\\Controllers\\Admin\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SettingsController.php',
         'App\\Http\\Controllers\\Admin\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SliderController.php',
         'App\\Http\\Controllers\\Admin\\SubCategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SubCategoriesController.php',
@@ -645,6 +647,7 @@ class ComposerStaticInit4d9cec9033d7d732aaa113238db22499
         'App\\Models\\ProductCategory' => __DIR__ . '/../..' . '/app/Models/ProductCategory.php',
         'App\\Models\\ProductTag' => __DIR__ . '/../..' . '/app/Models/ProductTag.php',
         'App\\Models\\ProductTranslation' => __DIR__ . '/../..' . '/app/Models/ProductTranslation.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\SettingTranslation' => __DIR__ . '/../..' . '/app/Models/SettingTranslation.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',

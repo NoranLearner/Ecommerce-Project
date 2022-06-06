@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Basket\\Basket' => $baseDir . '/app/Basket/Basket.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Events\\NewOrder' => $baseDir . '/app/Events/NewOrder.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exceptions\\QuantityExceededException' => $baseDir . '/app/Exceptions/QuantityExceededException.php',
     'App\\Http\\Controllers\\Admin\\AttributesController' => $baseDir . '/app/Http/Controllers/Admin/AttributesController.php',
@@ -19,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\OptionsController' => $baseDir . '/app/Http/Controllers/Admin/OptionsController.php',
     'App\\Http\\Controllers\\Admin\\ProductController' => $baseDir . '/app/Http/Controllers/Admin/ProductController.php',
     'App\\Http\\Controllers\\Admin\\ProfileController' => $baseDir . '/app/Http/Controllers/Admin/ProfileController.php',
+    'App\\Http\\Controllers\\Admin\\RolesController' => $baseDir . '/app/Http/Controllers/Admin/RolesController.php',
     'App\\Http\\Controllers\\Admin\\SettingsController' => $baseDir . '/app/Http/Controllers/Admin/SettingsController.php',
     'App\\Http\\Controllers\\Admin\\SliderController' => $baseDir . '/app/Http/Controllers/Admin/SliderController.php',
     'App\\Http\\Controllers\\Admin\\SubCategoriesController' => $baseDir . '/app/Http/Controllers/Admin/SubCategoriesController.php',
@@ -88,6 +90,7 @@ return array(
     'App\\Models\\ProductCategory' => $baseDir . '/app/Models/ProductCategory.php',
     'App\\Models\\ProductTag' => $baseDir . '/app/Models/ProductTag.php',
     'App\\Models\\ProductTranslation' => $baseDir . '/app/Models/ProductTranslation.php',
+    'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
     'App\\Models\\Setting' => $baseDir . '/app/Models/Setting.php',
     'App\\Models\\SettingTranslation' => $baseDir . '/app/Models/SettingTranslation.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',

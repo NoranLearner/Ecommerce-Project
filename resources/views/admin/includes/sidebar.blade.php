@@ -112,25 +112,29 @@
 
             <!-- ====================================================== -->
 
-            <li class="nav-item">
-                <a href="">
-                    <i class="la la-registered"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الماركات التجارية</span>
-                    <span class="badge badge badge-info badge-pill float-right mr-2">
+            @can('brands')
 
-                        {{ App\Models\Brand::count() }}
+                <li class="nav-item">
+                    <a href="">
+                        <i class="la la-registered"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">الماركات التجارية</span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">
 
-                    </span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('admin.brands') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="{{ route('admin.brands.create') }}" data-i18n="nav.dash.crypto">اضافة ماركة</a>
-                    </li>
-                </ul>
-            </li>
+                            {{ App\Models\Brand::count() }}
+
+                        </span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('admin.brands') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('admin.brands.create') }}" data-i18n="nav.dash.crypto">اضافة ماركة</a>
+                        </li>
+                    </ul>
+                </li>
+
+            @endcan
 
             <!-- ====================================================== -->
 
@@ -234,6 +238,46 @@
                 <ul class="menu-content">
                     <li>
                         <a class="menu-item" href="{{ route('admin.sliders.create') }}" data-i18n="nav.dash.ecommerce">صور السليدر</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-key"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> الصلاحيات </span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+                        {{ App\Models\Role::count() }}
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.roles.index') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.roles.create') }}" data-i18n="nav.dash.crypto">اضافة صلاحية</a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- ====================================================== -->
+
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-user"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> المستخدمين </span>
+                    <span class="badge badge badge-info badge-pill float-right mr-2">
+                        {{ App\Models\Admin::count() }}
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.users.index') }}" data-i18n="nav.dash.ecommerce">عرض الكل</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admin.users.create') }}" data-i18n="nav.dash.crypto">اضافة مستخدم</a>
                     </li>
                 </ul>
             </li>

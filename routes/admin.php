@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\OptionsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -15,7 +18,6 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AttributesController;
 use App\Http\Controllers\Admin\LoginAdminController;
-use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoriesController;
 use App\Http\Controllers\Admin\MainCategoriesController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -168,7 +170,7 @@ Route::group([
 
         // ***************** Begin Brands Routes ****************** //
 
-        Route::group(['prefix'=>'brands'], function(){
+        Route::group(['prefix'=>'brands', 'middleware' => 'can:brands'], function(){
 
             Route::get('/', [BrandController::class, 'index'])->name('admin.brands');
 
@@ -188,7 +190,7 @@ Route::group([
 
         // ***************** Begin Tags Routes ****************** //
 
-        Route::group(['prefix'=>'tags'], function(){
+        Route::group(['prefix'=>'tags','middleware' => 'can:tags'], function(){
 
             Route::get('/', [TagController::class, 'index'])->name('admin.tags');
 
@@ -208,7 +210,7 @@ Route::group([
 
         // ***************** Begin Products Routes ****************** //
 
-        Route::group(['prefix'=>'products'], function(){
+        Route::group(['prefix'=>'products','middleware' => 'can:products'], function(){
 
             Route::get('/', [ProductController::class, 'index'])->name('admin.products');
 
@@ -260,11 +262,9 @@ Route::group([
 
         // ***************** End Attributes Routes ****************** //
 
-        // ***************** End Products Routes ****************** //
-
         // ***************** Begin Options Routes ****************** //
 
-        Route::group(['prefix'=>'options'], function(){
+        Route::group(['prefix'=>'options','middleware' => 'can:options'], function(){
 
             Route::get('/', [OptionsController::class, 'index'])->name('admin.options');
 
@@ -296,9 +296,41 @@ Route::group([
 
         // ***************** End Sliders Routes ****************** //
 
+        // ***************** Begin Roles Routes ****************** //
+
+        Route::group(['prefix'=>'roles'], function(){
+
+            Route::get('/', [RolesController::class, 'index'])->name('admin.roles.index');
+
+            Route::get('create', [RolesController::class, 'create'])->name('admin.roles.create');
+
+            Route::post('store', [RolesController::class, 'saveRole'])->name('admin.roles.store');
+
+            Route::get('edit/{id}', [RolesController::class, 'edit'])->name('admin.roles.edit');
+
+            Route::post('update/{id}', [RolesController::class, 'update'])->name('admin.roles.update');
+
+        });
+
+        // ***************** End Roles Routes ****************** //
+
+        // ***************** Begin Users Routes ****************** //
+
+        Route::group(['prefix'=>'users' , 'middleware' => 'can:users'], function(){
+
+            Route::get('/', [UsersController::class, 'index'])->name('admin.users.index');
+
+            Route::get('create', [UsersController::class, 'create'])->name('admin.users.create');
+
+            Route::post('store', [UsersController::class, 'store'])->name('admin.users.store');
+
+        });
+
+        // ***************** End Users Routes ****************** //
+
         // ***************** Begin Settings Routes ****************** //
 
-        Route::group(['prefix'=>'settings'], function(){
+        Route::group(['prefix'=>'settings', 'middleware' => 'can:settings'], function(){
 
             Route::get('shipping-methods/{type}', [SettingsController::class, 'editShippingMethods'])->name('edit.shipping.methods');
 
